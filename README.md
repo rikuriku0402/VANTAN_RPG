@@ -25,9 +25,6 @@
 ### Toony Colors Pro 2
 > https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105
 
-### NaughtyAttributes
-> https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996?locale=ja-JP
-
 ## コード規則
 
 変数名は[キャメルケース](https://e-words.jp/w/%E3%82%AD%E3%83%A3%E3%83%A1%E3%83%AB%E3%82%B1%E3%83%BC%E3%82%B9.html) (先頭小文字)
