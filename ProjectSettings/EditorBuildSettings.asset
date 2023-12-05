@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/Test_FadeScene.unity
     guid: 0b0ee57b97375854a8a264c856d21b64
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
