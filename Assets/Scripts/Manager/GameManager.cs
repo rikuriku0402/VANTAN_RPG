@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool IsGame => _isGame;
+    
     [SerializeField]
     [Header("SceneLoader")]
     private SceneLoader _sceneLoader;
@@ -36,4 +38,5 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public bool GameModeChange(bool isGame) => _isGame = isGame;
 }
