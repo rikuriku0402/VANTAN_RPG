@@ -11,6 +11,8 @@ public class Unit : MonoBehaviour
     
     public int Attack => _attack;
     
+    public int MagicAttack => _magicAttack;
+    
     [SerializeField]
     [Header("HPスライダー")]
     private Slider _hpSlider;
@@ -20,6 +22,10 @@ public class Unit : MonoBehaviour
     private int _attack;
     
     [SerializeField]
+    [Header("魔法攻撃")]
+    private int _magicAttack;
+    
+    [SerializeField]
     [Header("マックスHP")]
     private int _maxHp = 100;
     
@@ -27,6 +33,8 @@ public class Unit : MonoBehaviour
     [Header("HP")]
     private int _hp;
     
+    [SerializeField]
+    [Header("キャラクターのレベル")]
     private Level _level;
     
     private enum Level
@@ -46,33 +54,41 @@ public class Unit : MonoBehaviour
 
     public void OnDamage(int damage)
     {
-        RandomAttack();
+        RandomAction();
         _hp -= damage;
         Debug.Log(_hp);
+        Debug.Log(damage);
         if (_hp <= 0)
         {
             _hp = 0;
-            Debug.Log("ゲームオーバー");
+            Debug.Log("バトル終了");
         }
         
         _hpSlider.value = _hp;
     }
 
-    private void RandomAttack()
+    private void RandomAction()
     {
         switch (_level)
         {
             case Level.LEVEL1:
                 _attack = Random.Range(5,10);
+                _magicAttack = Random.Range(20,30);
                 break;
+            
             case Level.LEVEL2:
-                _attack = Random.Range(10,20);
+                _attack = Random.Range(10,20);        
+                _magicAttack = Random.Range(30,40);
                 break;
+            
             case Level.LEVEL3:
                 _attack = Random.Range(20,30);
+                _magicAttack = Random.Range(40,50);
                 break;
+            
             case Level.LEVEL4:
                 _attack = Random.Range(40,50);
+                _magicAttack = Random.Range(50,60);
                 break;
         }
     }

@@ -1,15 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
     [SerializeField]
-    [Header("プレイヤーの情報")]
+    [Header("キャラの情報")]
     private  Unit _playerUnit;
+    
+    [SerializeField]
+    [Header("GameManager")]
+    private GameManager _gameManager;
     
     [SerializeField]
     [Header("敵の情報")]
@@ -20,44 +22,41 @@ public class BattleManager : MonoBehaviour
     private Button _attackButton;
     
     [SerializeField]
-    [Header("リザルトボタン")]
-    private GameObject _resultPanel;
+    [Header("魔法攻撃ボタン")]
+    private Button _magicAttackButton;
     
     private bool _isPlayerTurn = true;
     
-    private bool _isGameOver = false;
-    
     private float _second = 0f;
+    
+    private int i = 0;
     
     void Start()
     {
         _isPlayerTurn = true;
-        _isGameOver = false;
-        _resultPanel.SetActive(false);
+        
+        // ボタンへの登録
         _attackButton.onClick.AddListener(PushAttackButton);
+        _magicAttackButton.onClick.AddListener(PushMagicAttackButton);
     }
 
     private void Update()
     {
-        if (_isGameOver)
+        EnemyTurn();
+
+        // ゲームオーバー判定
+        if (_playerUnit.HP <= 0 && _gameManager.IsGame)
         {
-            ViewResult();
+            _gameManager.GameOver();
+            _gameManager.GameModeChange(false);
             return;
         }
-        if (!_isPlayerTurn)
+        
+        if (_enemyUnit.HP <= 0 && !_gameManager.IsGame)
         {
-            _second += Time.deltaTime;
-            if (_second >= 1f)
-            {
-                _second = 0f;
-                _isPlayerTurn = true;
-                _playerUnit.OnDamage(_enemyUnit.Attack);
-            }
-        }
-
-        if (_playerUnit.HP == 0 || _enemyUnit.HP == 0)
-        {
-            _isGameOver = true;
+            _gameManager.GameClear();
+            _gameManager.GameModeChange(true);
+            return;
         }
     }
 
@@ -70,8 +69,44 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void ViewResult()
+    private void PushMagicAttackButton()
     {
-        _resultPanel.SetActive(true);
+        if (_isPlayerTurn)
+        {
+            _enemyUnit.OnDamage(_playerUnit.MagicAttack);
+            _isPlayerTurn = false;
+        }
+    }
+
+    private void EnemyTurn()
+    {
+        i = Random.Range(0,1);
+        
+        if (!_isPlayerTurn)
+        {
+            _second += Time.deltaTime;
+            if (i == 0)
+            {
+                if (_second >= 1f)
+                {
+                    _second = 0f;
+                    _isPlayerTurn = true;
+                    _playerUnit.OnDamage(_enemyUnit.Attack);
+                    
+                    Debug.Log("通常攻撃");
+                }
+            }
+            else
+            {
+                if (_second >= 1f)
+                {
+                    _second = 0f;
+                    _isPlayerTurn = true;
+                    _playerUnit.OnDamage(_enemyUnit.MagicAttack);
+                    
+                    Debug.Log("魔法攻撃");
+                }
+            }
+        }
     }
 }
