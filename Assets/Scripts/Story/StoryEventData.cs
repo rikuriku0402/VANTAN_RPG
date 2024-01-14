@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "EventData", menuName = "ScriptableObjects/EventData")] 
-public class EventData : ScriptableObject
+[CreateAssetMenu(fileName = "StoryEventData", menuName = "ScriptableObjects/StoryEventData")] 
+public class StoryEventData : ScriptableObject
 {
-    public List<Event> Event => _event;
+    public List<StoryEvent> Event => _event;
 
     [SerializeField]
-    private List<Event> _event = new();
+    private List<StoryEvent> _event = new();
 }
 
 [System.Serializable]
-public class Event
+public class StoryEvent
 {
     public string EventName => _eventName;
     public string SheetName => _sheetName;
@@ -22,6 +22,10 @@ public class Event
     public AudioClip Se => _se;
     public AudioSource BGM => _bgm;
     public EventAction Action => _eventAction;
+    
+    [SerializeField]
+    [Header("何がしたいか")]
+    private EventAction _eventAction;
     
     [SerializeField] 
     [Header("イベント名")]
@@ -32,9 +36,8 @@ public class Event
     private string _sheetName;
     
     [SerializeField]
-    [Range(1, 5)]
     [Header("読みこむ行数")]
-    private int _laneNum = 1;
+    private int _laneNum = 1; 
 
     [SerializeField] 
     [Header("生成したいエフェクト")]
@@ -47,17 +50,13 @@ public class Event
     [SerializeField] 
     [Header("再生したいBGM")] 
     private AudioSource _bgm;
-    
-    [SerializeField]
-    [Header("何がしたいか")]
-    private EventAction _eventAction;
-    
+
 }
 
 public enum EventAction
 {
-    Branch,
-    Effect,
+    BRANCH,
+    EFFECT,
     SE,
     BGM,
 }

@@ -7,24 +7,21 @@ using UnityEngine.Serialization;
 public class EventView : MonoBehaviour
 {
     [SerializeField] 
-    private ScenarioManager _scenarioManager; 
+    private GSSReader _gssReader; 
     
-    [SerializeField] 
-    private ScenarioData _scenarioData;
-
     [SerializeField]
     private TextView _textView;
     
     [SerializeField]
-    private EventData _eventData;
+    private StoryEventData _storyEventData;
     
     private const int EVENTNAME_LINE = 2;
     private const int EVENTCONTENT_LINE = 3;
     
     private async void Start()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.1f)); 
-        _scenarioData.LineNum
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+        _textView.LineNum
             .Skip(1)
             .Subscribe(EventCheck)
             .AddTo(this);
@@ -32,29 +29,31 @@ public class EventView : MonoBehaviour
 
     private void EventCheck(int value)
     {
-        var data = _scenarioManager.Datas;
-        OnEvent(data[value][EVENTNAME_LINE], data[value][EVENTCONTENT_LINE]);
+        var data = _gssReader.Datas;
+        if(data.Length == value) return;
+        EventFlag(data[value][EVENTNAME_LINE], data[value][EVENTCONTENT_LINE]);
     }
 
-    private async void OnEvent(string eventName, string eventContent)
+    private async void EventFlag(string eventName, string eventContent)
     {
         var token = this.GetCancellationTokenOnDestroy();
-        foreach (var t in _eventData.Event)
+        foreach (var t in _storyEventData.Event)
         {
             if (t.EventName != eventName) continue;
-            if (EventAction.Branch.ToString() == eventContent)
+            if (EventAction.BRANCH.ToString() == eventContent)
             {
                 Debug.Log("分岐を発生");
                 if (t.EventName == eventName)
                 {
                     Debug.Log($"{t.SheetName}の{t.LaneNum}行目へ");
-                    await StartCoroutine(_scenarioManager.GetFromWeb(t.SheetName));
-                    await UniTask.WaitUntil(() => _textView.IsClicked(), cancellationToken: token);
-                    _scenarioData.ChangeLine(t.LaneNum);
+                    //await UniTask.WaitUntil(() => _textView.IsClicked(), cancellationToken: token);
+                    await UniTask.WaitUntil(() => !_textView.IsPlaying, cancellationToken: token);
+                    await StartCoroutine(_gssReader.GetFromWeb(t.SheetName));
+                    _textView.ChangeLine(t.LaneNum);
                 }
             }
 
-            if (EventAction.Effect.ToString() == eventContent)
+            if (EventAction.EFFECT.ToString() == eventContent)
             {
                 Debug.Log(t.Effect);
                 Debug.Log("エフェクトを生成");

@@ -4,14 +4,15 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ScenarioManager : MonoBehaviour
+public class GSSReader : MonoBehaviour
 {
+    public string SheetName => _sheetName;
     public string[][] Datas => _datas;
 
     [SerializeField]
     private string _sheetID = "読み込むシートのID";
-    
-    [SerializeField]
+
+    [SerializeField] 
     private string _sheetName = "読み込むシート";
     
     private string[][] _datas;
@@ -20,7 +21,6 @@ public class ScenarioManager : MonoBehaviour
     private void Awake() => StartCoroutine(GetFromWeb(_sheetName));
     
     /// <summary>GSS(グーグルスプレッドシート)を読み込む</summary>
-    /// <returns></returns>
     public IEnumerator GetFromWeb(string sheetName)
     {
         _sheetName = sheetName;
@@ -33,13 +33,13 @@ public class ScenarioManager : MonoBehaviour
 
         var protocol_error = request.result == UnityWebRequest.Result.ProtocolError ? true : false;
         var connection_error = request.result == UnityWebRequest.Result.ConnectionError ? true : false;
-        
+
         if (protocol_error || connection_error)
             Debug.LogError(request.error);
         else
             _datas = ConvertGSStoJaggedArray(request.downloadHandler.text);
     }
-    
+
     /// <summary>読み込んだGSSをstring化</summary>
     /// <param name="text">GSSデータ</param>
     /// <returns>変換されたGSSデータ</returns>
@@ -49,14 +49,16 @@ public class ScenarioManager : MonoBehaviour
         var rows = new List<string[]>();
         while (reader.Peek() >= 0)
         {
-            var line = reader.ReadLine();        // 一行ずつ読み込み
-            var elements = line.Split(',');    // 行のセルは,で区切られる
+            var line = reader.ReadLine(); // 一行ずつ読み込み
+            var elements = line.Split(','); // 行のセルは,で区切られる
             for (var i = 0; i < elements.Length; i++)
             {
                 elements[i] = elements[i].TrimStart('"').TrimEnd('"');
             }
+
             rows.Add(elements);
         }
+
         return rows.ToArray();
     }
 }
