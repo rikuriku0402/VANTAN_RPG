@@ -8,9 +8,14 @@ using UniRx.Triggers;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class TextView : MonoBehaviour,IPointerClickHandler
+public class TextView : MonoBehaviour
 {
     public bool IsPlaying => _isPlaying;
+    public IntReactiveProperty LineNum => _lineNum;
+
+    [SerializeField]
+    [Header("現在の行数")]
+    private IntReactiveProperty _lineNum = new(1);
 
     /// <summary>喋っている人の名前</summary>
     [SerializeField] 
@@ -23,8 +28,8 @@ public class TextView : MonoBehaviour,IPointerClickHandler
     private Text _talkText = null;
 
     [SerializeField] 
-    [Header("テキストが再生しているか")]
-    private bool _isPlaying = false;
+    [Header("クリックできるか")]
+    private bool _clickable = true;
 
     /// <summary>テキストの表示速度</summary>
     [SerializeField]
@@ -39,58 +44,52 @@ public class TextView : MonoBehaviour,IPointerClickHandler
     private float _textDisplayTime = 3.0f;
     
     [SerializeField] 
-    private ScenarioManager _scenarioManager;
+    private GSSReader _gssReader;
 
     [SerializeField]
-    private ScenarioData _scenarioData;
-    
     private bool _isAuto = false;
-    private bool _isClick = false;
+
+    [SerializeField]
+    private bool _isPlaying = false;
     
     private const int NAME_LINE = 0;
     private const int TALK_LINE = 1;
 
     private async void Start()
     {
-        _scenarioData.LineNum
+        _lineNum
             .Skip(1)
             .Subscribe(CoText).AddTo(this);
 
+        this.UpdateAsObservable()
+            .Subscribe(_ => Next())
+            .AddTo(this);
+        
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
-        CoText(_scenarioData.LineNum.Value);
+        CoText(_lineNum.Value);
     }
     
     /// <summary>GSSを上から一行ずつ出力</summary>
     private async void CoText(int value)
     {
-        var data = _scenarioManager.Datas;
+        var token = this.GetCancellationTokenOnDestroy();
         
-        if (data.Length == value)
-            DrawText("","");
-        else
-        {
-            Debug.Log($"現在：{value}行");
-            DrawText(data[value][NAME_LINE], data[value][TALK_LINE]);
-            if(!_isAuto) return;
-            await UniTask.Delay(TimeSpan.FromSeconds(_textDisplayTime));
-            _scenarioData.NextLine();   
-        }
+        var data = _gssReader.Datas;
+        if(data.Length == value) return;
+        Debug.Log($"{value}行目");
+        
+        DrawText(data[value][NAME_LINE], data[value][TALK_LINE]);
+        if(!_isAuto) return;
+        await UniTask.Delay(TimeSpan.FromSeconds(_textDisplayTime), cancellationToken: token);
+        NextLine();
     }
 
     /// <summary>GSSの名前とセリフをテキストに反映</summary>
     private void DrawText(string name, string text)
     {
         _nameText.text = name;
-        // StartCoroutine(CoDrawText(text));
-        _talkText.text = text;
-    }
-    
-    /// <summary>次の行へ</summary>
-    private void Next()
-    {
-        // if (IsClicked())
-            _scenarioData.NextLine();
-            _isClick = false;
+        StartCoroutine(CoDrawText(text));
+        //_talkText.text = text;
     }
 
     /// <summary>テキストがヌルヌル出てくるためのコルーチン</summary>
@@ -98,29 +97,36 @@ public class TextView : MonoBehaviour,IPointerClickHandler
     {
         _isPlaying = true;
         float time = 0;
-    
+
         while (true)
         {
             yield return null;
             time += Time.deltaTime;
-    
+
             if (IsClicked()) break;
-    
-            int len = Mathf.FloorToInt(time / textSpeed);
+
+            var len = Mathf.FloorToInt(time / textSpeed);
             if (len > text.Length) break;
             _talkText.text = text.Substring(0, len);
         }
-    
+
         _talkText.text = text;
         yield return null;
         _isPlaying = false;
     }
 
+    /// <summary>次の行へ</summary>
+    private void Next()
+    {
+        if (IsClicked() && _clickable) NextLine();
+    }
+
+
     /// <summary>クリック判定</summary>
     /// <returns>押されたかどうか</returns>
-    public bool IsClicked()
+    private bool IsClicked()
     {
-        return _isClick;
+        return Input.GetMouseButtonDown(0);
     }
 
     /// <summary>クリックされると一気に表示</summary>
@@ -133,9 +139,7 @@ public class TextView : MonoBehaviour,IPointerClickHandler
             yield return null;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        _isClick = true;
-        Next();
-    }
+    private void NextLine() => _lineNum.Value++;
+
+    public void ChangeLine(int num) => _lineNum.Value = num;
 }
