@@ -10,12 +10,12 @@ public class BattleManager : MonoBehaviour
     private  Unit _playerUnit;
     
     [SerializeField]
-    [Header("GameManager")]
-    private GameManager _gameManager;
-    
-    [SerializeField]
     [Header("敵の情報")]
     private Unit _enemyUnit;
+    
+    [SerializeField]
+    [Header("GameManager")]
+    private GameManager _gameManager;
     
     [SerializeField]
     [Header("攻撃ボタン")]
@@ -31,6 +31,8 @@ public class BattleManager : MonoBehaviour
     
     private int i = 0;
     
+    private CharaName _charaName;
+    
     void Start()
     {
         _isPlayerTurn = true;
@@ -45,14 +47,14 @@ public class BattleManager : MonoBehaviour
         EnemyTurn();
 
         // ゲームオーバー判定
-        if (_playerUnit.HP <= 0 && _gameManager.IsGame)
+        if (_playerUnit.CharacterStatuList.hp <= 0 && _gameManager.IsGame)
         {
             _gameManager.GameOver();
             _gameManager.GameModeChange(false);
             return;
         }
         
-        if (_enemyUnit.HP <= 0 && !_gameManager.IsGame)
+        if (_enemyUnit.CharacterStatuList.hp <= 0 && !_gameManager.IsGame)
         {
             _gameManager.GameClear();
             _gameManager.GameModeChange(true);
@@ -64,7 +66,7 @@ public class BattleManager : MonoBehaviour
     {
         if (_isPlayerTurn)
         {
-            _enemyUnit.OnDamage(_playerUnit.Attack);
+            _enemyUnit.OnDamage(_playerUnit.CharacterStatuList.attack);
             _isPlayerTurn = false;
         }
     }
@@ -73,7 +75,7 @@ public class BattleManager : MonoBehaviour
     {
         if (_isPlayerTurn)
         {
-            _enemyUnit.OnDamage(_playerUnit.MagicAttack);
+            _enemyUnit.OnDamage(_playerUnit.CharacterStatuList.magicAttack);
             _isPlayerTurn = false;
         }
     }
@@ -91,7 +93,7 @@ public class BattleManager : MonoBehaviour
                 {
                     _second = 0f;
                     _isPlayerTurn = true;
-                    _playerUnit.OnDamage(_enemyUnit.Attack);
+                    _playerUnit.OnDamage(_enemyUnit.CharacterStatuList.attack);
                     
                     Debug.Log("通常攻撃");
                 }
@@ -102,7 +104,7 @@ public class BattleManager : MonoBehaviour
                 {
                     _second = 0f;
                     _isPlayerTurn = true;
-                    _playerUnit.OnDamage(_enemyUnit.MagicAttack);
+                    _playerUnit.OnDamage(_enemyUnit.CharacterStatuList.magicAttack);
                     
                     Debug.Log("魔法攻撃");
                 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +16,9 @@ public class CharacterChange : MonoBehaviour
     [SerializeField]
     [Header("キャラクター変化ボタン")]
     private List<Button> _charaChangeButton;
-    
-    [SerializeField]
-    [Header("キャラクターステータス")]
-    private CharacterStatus[] _characterStatus;
-    
+
     private const int LINE = 0;
+    
     void Start()
     {
         int charaNum = 0;
@@ -54,31 +50,5 @@ public class CharacterChange : MonoBehaviour
     {
         Debug.Log("Character" + charaNum);
         _characterImage.sprite = _characterList[charaNum];
-    }
-}
-
-[System.Serializable]
-class CharacterStatus
-{
-    public string name;
-    
-    public int hp;
-    
-    public int attack;
-    
-    public int defense;
-    
-    public int magicAttack;
-    
-    public int magicDefense;
-    
-    public int speed;
-    
-    public Type type;
-    public enum Type
-    {
-        FIRE,
-        WATER,
-        TREE,
     }
 }

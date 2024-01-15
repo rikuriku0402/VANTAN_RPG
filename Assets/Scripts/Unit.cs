@@ -1,95 +1,119 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    public int HP => _hp;
-    
-    public int MaxHP => _maxHp;
-    
-    public int Attack => _attack;
-    
-    public int MagicAttack => _magicAttack;
+    public CharacterStatus CharacterStatuList => _characterStatuList;
     
     [SerializeField]
     [Header("HPスライダー")]
     private Slider _hpSlider;
     
     [SerializeField]
-    [Header("攻撃力")]
-    private int _attack;
+    [Header("キャラクターのステータス")]
+    private CharacterStatus _characterStatuList;
     
     [SerializeField]
-    [Header("魔法攻撃")]
-    private int _magicAttack;
+    [Header("GSSReader")]
+    private GSSReader _gssReader;
     
     [SerializeField]
-    [Header("マックスHP")]
-    private int _maxHp = 100;
+    private CharaName _charaName;
     
     [SerializeField]
-    [Header("HP")]
-    private int _hp;
+    private int _nameLine;
     
     [SerializeField]
-    [Header("キャラクターのレベル")]
-    private Level _level;
+    private int _hpLine;
     
-    private enum Level
+    [SerializeField]
+    private int _attackLine;
+    
+    [SerializeField]
+    private int _defenseLine;
+    
+    [SerializeField]
+    private int _magicAttackLine;
+    
+    [SerializeField]
+    private int _magicDefenseLine;
+    
+    [SerializeField]
+    private int _speedLine;
+    
+    [SerializeField]
+    private int _maxHpLine;
+    
+    async void Start()
     {
-        LEVEL1,
-        LEVEL2,
-        LEVEL3,
-        LEVEL4
+        await WaitRoad();
+
+        _characterStatuList.hp = _characterStatuList.maxHp;
+        _hpSlider.maxValue = _characterStatuList.maxHp;
+        _hpSlider.value = _characterStatuList.hp;
     }
-    
-    void Start()
+
+    private async UniTask WaitRoad()
     {
-        _hp = _maxHp;
-        _hpSlider.maxValue = _maxHp;
-        _hpSlider.value = _hp;
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        string name = _gssReader.Datas[1][_nameLine];
+        
+        Debug.Log($"名前{_characterStatuList.name = _gssReader.Datas[1][_nameLine]}");
+        Debug.Log($"HP{_characterStatuList.hp = int.Parse(_gssReader.Datas[1][_hpLine])}");
+        Debug.Log($"物理攻撃力{_characterStatuList.attack = int.Parse(_gssReader.Datas[1][_attackLine])}");
+        Debug.Log($"物理防御力{_characterStatuList.defense = int.Parse(_gssReader.Datas[1][_defenseLine])}");
+        Debug.Log($"魔法攻撃力{_characterStatuList.magicAttack = int.Parse(_gssReader.Datas[1][_magicAttackLine])}");
+        Debug.Log($"魔法防御力{_characterStatuList.magicDefense = int.Parse(_gssReader.Datas[1][_magicDefenseLine])}");
+        Debug.Log($"素早さ{_characterStatuList.speed = int.Parse(_gssReader.Datas[1][_speedLine])}");
+        // Debug.Log(_characterStatuList.maxHp = int.Parse(_gssReader.Datas[1][_maxHpLine]));
     }
 
     public void OnDamage(int damage)
     {
-        RandomAction();
-        _hp -= damage;
-        Debug.Log(_hp);
+        // RandomAction();
+        _characterStatuList.hp -= damage;
         Debug.Log(damage);
-        if (_hp <= 0)
+        if (_characterStatuList.hp <= 0)
         {
-            _hp = 0;
+            _characterStatuList.hp = 0;
             Debug.Log("バトル終了");
         }
+        // Debug.Log(_characterStatuList.type = int.Parse(_gssReader.Datas[0][_nameLine]));
         
-        _hpSlider.value = _hp;
+        _hpSlider.value = _characterStatuList.hp;
     }
+}
 
-    private void RandomAction()
+[System.Serializable]
+public class CharacterStatus
+{
+    public string name;
+    
+    public int hp;
+    
+    public int maxHp;
+
+    public int attack;
+    
+    public int defense;
+    
+    public int magicAttack;
+    
+    public int magicDefense;
+    
+    public int speed;
+
+    public Type type;
+
+    public enum Type
     {
-        switch (_level)
-        {
-            case Level.LEVEL1:
-                _attack = Random.Range(5,10);
-                _magicAttack = Random.Range(20,30);
-                break;
-            
-            case Level.LEVEL2:
-                _attack = Random.Range(10,20);        
-                _magicAttack = Random.Range(30,40);
-                break;
-            
-            case Level.LEVEL3:
-                _attack = Random.Range(20,30);
-                _magicAttack = Random.Range(40,50);
-                break;
-            
-            case Level.LEVEL4:
-                _attack = Random.Range(40,50);
-                _magicAttack = Random.Range(50,60);
-                break;
-        }
+        FIRE,
+        WATER,
+        TREE,
     }
 }
