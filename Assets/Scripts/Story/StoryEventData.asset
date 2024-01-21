@@ -13,17 +13,60 @@ MonoBehaviour:
   m_Name: StoryEventData
   m_EditorClassIdentifier: 
   _event:
-  - _eventName: "\u5206\u5C90A"
-    _sheetName: Branch_A
-    _laneNum: 1
-    _effect: {fileID: 0}
-    _se: {fileID: 0}
-    _bgm: {fileID: 0}
-    _eventAction: 0
   - _eventName: "\u5206\u5C90B"
     _sheetName: Branch_B
     _laneNum: 1
-    _effect: {fileID: 0}
+    _effect:
+    - {fileID: 0}
     _se: {fileID: 0}
     _bgm: {fileID: 0}
-    _eventAction: 0
+    _eventAction: 00000000
+  - _eventName: "\u5206\u5C90A"
+    _sheetName: Branch_A
+    _laneNum: 1
+    _effect:
+    - {fileID: 0}
+    _se: {fileID: 0}
+    _bgm: {fileID: 0}
+    _eventAction: 00000000
+  - _eventName: "\u7206\u767A"
+    _sheetName: 
+    _laneNum: 0
+    _effect:
+    - {fileID: 2171034558999010478, guid: 35a266f4ac6eec14db84b978296fb130, type: 3}
+    - {fileID: 2171034558999010478, guid: 35a266f4ac6eec14db84b978296fb130, type: 3}
+    - {fileID: 2171034558999010478, guid: 35a266f4ac6eec14db84b978296fb130, type: 3}
+    _se: {fileID: 8300000, guid: 214b27680b73a5949855687b76ec234e, type: 3}
+    _bgm: {fileID: 0}
+    _eventAction: 0100000002000000
+  - _eventName: "\u30EC\u30D9\u30EB\u30A2\u30C3\u30D7"
+    _sheetName: 
+    _laneNum: 0
+    _effect:
+    - {fileID: 2171034558999010478, guid: 35a266f4ac6eec14db84b978296fb130, type: 3}
+    _se: {fileID: 8300000, guid: e9ccae1a0a3d8904aa9351a52de22433, type: 3}
+    _bgm: {fileID: 0}
+    _eventAction: 0200000001000000
+  - _eventName: "\u3007\u3007BGM"
+    _sheetName: 
+    _laneNum: 0
+    _effect:
+    - {fileID: 0}
+    _se: {fileID: 0}
+    _bgm: {fileID: 8300000, guid: e173a9ba9870c7542afe53ed8b5b485a, type: 3}
+    _eventAction: 03000000
+  - _eventName: "\u25B3\u25B3BGM"
+    _sheetName: 
+    _laneNum: 0
+    _effect:
+    - {fileID: 0}
+    _se: {fileID: 0}
+    _bgm: {fileID: 8300000, guid: 4c0daa9c4e0657f41bec16359959967e, type: 3}
+    _eventAction: 03000000
+  - _eventName: "BGM\u4E2D\u65AD"
+    _sheetName: 
+    _laneNum: 0
+    _effect: []
+    _se: {fileID: 0}
+    _bgm: {fileID: 0}
+    _eventAction: 04000000
