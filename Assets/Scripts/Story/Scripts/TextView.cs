@@ -45,9 +45,13 @@ public class TextView : MonoBehaviour
     [Range(1.0f, 3.0f)]
     [Header("テキストの切り替え速度")] 
     private float _textDisplayTime = 3.0f;
+
+    [SerializeField]
+    private AudioClip _textSe;
     
     [SerializeField] 
     private GSSReader _gssReader;
+
 
     [SerializeField]
     private bool _isAuto = false;
@@ -66,10 +70,6 @@ public class TextView : MonoBehaviour
             .Skip(1)
             .Subscribe(CoText).AddTo(this);
 
-        //this.UpdateAsObservable()
-        //    .Subscribe(_ => Next())
-        //    .AddTo(this);
-
         await UniTask.WaitUntil(() => !_gssReader.IsLoading, cancellationToken: token);
         CoText(_lineNum.Value);
     }
@@ -82,13 +82,14 @@ public class TextView : MonoBehaviour
         Debug.Log($"{value}行目");
 
         DrawText(data[value][NAME_LINE], data[value][TALK_LINE]);
+
         if (!_isAuto) await Skip();
         else await UniTask.Delay(TimeSpan.FromSeconds(_textDisplayTime));
 
         NextLine();
     }
 
-    /// <summary>GSSの名前とセリフをテキストに反映</summary>
+    /// <summary>名前とセリフをテキストに反映</summary>
     private void DrawText(string name, string text)
     {
         _nameText.text = name;
@@ -118,11 +119,6 @@ public class TextView : MonoBehaviour
         yield return null;
         _isPlaying = false;
     }
-
-    //private void Next()
-    //{
-    //    if (IsClicked() && _clickable) NextLine();
-    //}
 
     /// <summary>クリック判定</summary>
     /// <returns>押されたかどうか</returns>

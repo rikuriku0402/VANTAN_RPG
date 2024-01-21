@@ -66,8 +66,7 @@ MonoBehaviour:
   - _eventName: "BGM\u4E2D\u65AD"
     _sheetName: 
     _laneNum: 0
-    _effect:
-    - {fileID: 0}
+    _effect: []
     _se: {fileID: 0}
     _bgm: {fileID: 0}
     _eventAction: 04000000

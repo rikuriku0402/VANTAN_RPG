@@ -16,7 +16,10 @@ public class EventView : MonoBehaviour
     private StoryEventData _storyEventData;
 
     [SerializeField]
-    private AudioSource _bgmSource;
+    private SoundManager _soundManager;
+
+    [SerializeField]
+    private EffectManager _effectManager;
 
     private const int EVENTNAME_LINE = 2;
     private const int EVENTCONTENT_LINE = 3;
@@ -36,12 +39,13 @@ public class EventView : MonoBehaviour
     {
         var data = _gssReader.Datas;
         if(data.Length == value) return;
-        EventFlag(data[value][EVENTNAME_LINE], data[value][EVENTCONTENT_LINE]);
+        EventFlag(data[value][EVENTNAME_LINE]);
     }
 
-    private async void EventFlag(string eventName, string eventContent)
+    private async void EventFlag(string eventName)
     {
         var token = this.GetCancellationTokenOnDestroy();
+
         foreach (var t in _storyEventData.Event)
         {
             if (t.EventName != eventName) continue;
@@ -50,57 +54,52 @@ public class EventView : MonoBehaviour
             {
                 if (EventAction.BRANCH == t.Action[i])
                 {
-                    Debug.Log("分岐を発生");
-                    if (t.EventName == eventName)
+                    Debug.Log($"SheetName {t.SheetName} => No.{t.LaneNum}");
+
+                    if (!_textView.IsAuto)
                     {
-                        Debug.Log($"{t.SheetName}の{t.LaneNum}行目へ");
-                        if (!_textView.IsAuto)
-                        {
-                            await UniTask.WaitUntil(() => _textView.IsClicked(), cancellationToken: token);
-                            await _textView.Skip();
-                        }
-                        await _gssReader.GetFromWeb(t.SheetName);
-                        _textView.ChangeLine(t.LaneNum);
+                        await UniTask.WaitUntil(() => _textView.IsClicked(), cancellationToken: token);
+                        await _textView.Skip();
                     }
+
+                    await _gssReader.GetFromWeb(t.SheetName);
+                    _textView.ChangeLine(t.LaneNum);
                 }
 
                 if (EventAction.EFFECT == t.Action[i])
                 {
-                    Debug.Log(t.Effect);
-                    Debug.Log("エフェクトを生成");
-
-                    for(int k = 0; k < t.Effect.Length; k++)
+                    for (int k = 0; k < t.Effect.Length; k++)
                     {
-                        var effect = Instantiate(t.Effect[k], this.gameObject.transform /*座標を入力*/);
-                        effect.loop = false;
-                        effect.Play();
+                        Debug.Log($"Play Effect {t.Effect[k]}");
+                        _effectManager.PlayEffect(t.Effect[k], this.gameObject.transform, false);
                     }
-
                 }
 
                 if (EventAction.SE == t.Action[i])
                 {
-                    Debug.Log("効果音を再生");
-                    Debug.Log(t.SE);
+                    Debug.Log($"Play SE {t.SE}");
 
-                    _bgmSource.PlayOneShot(t.SE);
+                    _soundManager.PlaySeAudio(t.SE);
                 }
 
                 if (EventAction.PLAY_BGM == t.Action[i])
                 {
-                    Debug.Log("背景音楽を再生");
-                    Debug.Log(t.BGM);
+                    Debug.Log($"Play BGM {t.BGM}");
 
-                    _bgmSource.clip = t.BGM;
-                    _bgmSource.Play();
+                    _soundManager.ChangeAudio(t.BGM, true);
+                    _soundManager.PlayAudio();
                 }
 
                 if (EventAction.STOP_BGM == t.Action[i])
                 {
-                    Debug.Log("背景音楽を再生");
-                    Debug.Log(t.BGM);
+                    Debug.Log($"Stop BGM {t.BGM}");
 
-                    _bgmSource.Stop();
+                    _soundManager.StopAudio();
+                }
+
+                if(EventAction.PAUSE_BGM == t.Action[i])
+                {
+                    Debug.Log($"{t.BGM} pause");
                 }
             }
         }
