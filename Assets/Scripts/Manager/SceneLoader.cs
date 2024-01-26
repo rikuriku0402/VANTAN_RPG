@@ -22,6 +22,13 @@ public class SceneLoader : MonoBehaviour
         [SceneName.Game] = "Game",
         [SceneName.GameOver] = "GameOver",
         [SceneName.GameClear] = "GameClear",
+
+        [SceneName.Oikawa] = "Oikawa",
+        [SceneName.Est] = "Est",
+        [SceneName.Zyosi] = "Zyosi",
+        [SceneName.Ippan] = "Ippan",
+        [SceneName.Abe] = "Abe",
+
     };
 
     private void Start()
@@ -36,6 +43,11 @@ public class SceneLoader : MonoBehaviour
         Game,
         GameOver,
         GameClear,
+        Oikawa,
+        Est,
+        Zyosi,
+        Ippan,
+        Abe,
     }
 
     public async UniTask FadeIn(SceneName typeName)

@@ -60,4 +60,5 @@ public enum EventAction
     SE,
     PLAY_BGM,
     STOP_BGM,
+    PAUSE_BGM,
 }

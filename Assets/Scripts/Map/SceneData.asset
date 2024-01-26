@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4717dde1cf09ab94e8d2d53a5ca24925, type: 3}
+  m_Name: SceneData
+  m_EditorClassIdentifier: 
+  _scenebase:
+  - _test: 2
+    _Xpoint: 0
+    _Ypoint: 0
+  - _test: 8
+    _Xpoint: 0
+    _Ypoint: 1
+  - _test: 7
+    _Xpoint: 1
+    _Ypoint: 0
+  - _test: 5
+    _Xpoint: -1
+    _Ypoint: 0
+  - _test: 6
+    _Xpoint: 0
+    _Ypoint: -1
