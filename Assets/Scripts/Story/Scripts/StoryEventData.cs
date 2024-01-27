@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "StoryEventData", menuName = "ScriptableObjects/StoryEventData")] 
 public class StoryEventData : ScriptableObject
 {
-    public List<StoryEvent> Event => _event;
+    public IReadOnlyList<StoryEvent> StoryEvent => _event;
 
     [SerializeField]
     private List<StoryEvent> _event = new();
@@ -15,25 +16,28 @@ public class StoryEventData : ScriptableObject
 [System.Serializable]
 public class StoryEvent
 {
-    public string EventName => _eventName;
-    public string SheetName => _sheetName;
+    public EventName EventName => _eventName;
+    public SheetName SheetName => _sheetName;
     public int LaneNum => _laneNum;
     public ParticleSystem[] Effect => _effect;
     public AudioClip SE => _se;
     public AudioClip BGM => _bgm;
     public EventAction[] Action => _eventAction;
-    
-    [SerializeField] 
+
+    [SerializeField]
+    private string _event;
+
+    [SerializeField]
     [Header("イベント名")]
-    private string _eventName;
+    private EventName _eventName;
 
     [SerializeField]
     [Header("読みこむシート名")]
-    private string _sheetName;
+    private SheetName _sheetName;
     
     [SerializeField]
     [Header("読みこむ行数")]
-    private int _laneNum = 1; 
+    private int _laneNum = 1;
 
     [SerializeField] 
     [Header("生成したいエフェクト")]
@@ -55,10 +59,36 @@ public class StoryEvent
 
 public enum EventAction
 {
+    NONE,
     BRANCH,
     EFFECT,
     SE,
     PLAY_BGM,
     STOP_BGM,
     PAUSE_BGM,
+}
+
+public enum EventName
+{
+    BRANCH_HIGHSCHOOL,
+    BRANCH_BATLLE,
+    BRANCH_EST,
+    BRANCH_GIRL,
+    BRANCH_OIKAWA,
+    HIGHSCHOOL_BGM,
+    EST_BGM,
+    GIRL_BGM,
+    OIKAWA_BGM
+}
+
+public enum SheetName
+{
+    NONE,
+    SHEET_A,
+    SHEET_B,
+    SHEET_BATLLE,
+    SHEET_EST,
+    SHEET_HIGHSCHOOL,
+    SHEET_GIRL,
+    SHEET_OIKAWA,
 }

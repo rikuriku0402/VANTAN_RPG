@@ -1,0 +1,10 @@
+{
+    "name": "火スライム",
+    "hp": 500,
+    "atk": 150,
+    "def": 75,
+    "magicAtk": 0,
+    "magicDef": 0,
+    "speed": 0,
+    "type": ""
+}

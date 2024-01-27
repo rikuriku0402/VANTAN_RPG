@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -6,12 +7,12 @@ using UnityEngine.Serialization;
 
 public class EventView : MonoBehaviour
 {
-    [SerializeField] 
-    private GSSReader _gssReader; 
-    
+    [SerializeField]
+    private GSSReader _gssReader;
+
     [SerializeField]
     private TextView _textView;
-    
+
     [SerializeField]
     private StoryEventData _storyEventData;
 
@@ -21,9 +22,39 @@ public class EventView : MonoBehaviour
     [SerializeField]
     private EffectManager _effectManager;
 
+    [SerializeField]
+    private int _rikuVoiceCount;
+
+    private Dictionary<SheetName, string> _sheetName = new()
+    {
+        [SheetName.NONE] = null,
+        [SheetName.SHEET_A] = "始まりの章",
+        [SheetName.SHEET_B] = "Bルート",
+        [SheetName.SHEET_BATLLE] = "バトルシーン",
+        [SheetName.SHEET_GIRL] = "女子マップ",
+        [SheetName.SHEET_EST] = "ESTマップ",
+        [SheetName.SHEET_HIGHSCHOOL] = "一般校マップ",
+        [SheetName.SHEET_OIKAWA] = "及川マップ",
+    };
+
+    private Dictionary<EventName, string> _eventName = new()
+    {
+        [EventName.BRANCH_HIGHSCHOOL] = "ベルの大学入口",
+        [EventName.BRANCH_EST] = "VANTANTのロビー",
+        [EventName.BRANCH_GIRL] = "過去の部屋",
+        [EventName.BRANCH_OIKAWA] = "及川のエリア",
+        [EventName.HIGHSCHOOL_BGM] = "一般校マップBGM",
+        [EventName.EST_BGM] = "ESTマップBGM",
+        [EventName.GIRL_BGM] = "女子マップBGM",
+        [EventName.OIKAWA_BGM] = "及川マップBGM",
+    };
+
+
+    private const int NAME_LINE = 0;
+
     private const int EVENTNAME_LINE = 2;
     private const int EVENTCONTENT_LINE = 3;
-    
+
     private async void Start()
     {
         var token = this.GetCancellationTokenOnDestroy();
@@ -38,7 +69,7 @@ public class EventView : MonoBehaviour
     private void EventCheck(int value)
     {
         var data = _gssReader.Datas;
-        if(data.Length == value) return;
+        if (data.Length == value) return;
         EventFlag(data[value][EVENTNAME_LINE]);
     }
 
@@ -46,15 +77,15 @@ public class EventView : MonoBehaviour
     {
         var token = this.GetCancellationTokenOnDestroy();
 
-        foreach (var t in _storyEventData.Event)
+        foreach (var t in _storyEventData.StoryEvent)
         {
-            if (t.EventName != eventName) continue;
+            if (_eventName[t.EventName] != eventName) continue;
 
             for (int i = 0; i < t.Action.Length; i++)
             {
                 if (EventAction.BRANCH == t.Action[i])
                 {
-                    Debug.Log($"SheetName {t.SheetName} => No.{t.LaneNum}");
+                    Debug.Log($"SheetName {_sheetName[t.SheetName]} => No.{t.LaneNum}");
 
                     if (!_textView.IsAuto)
                     {
@@ -62,7 +93,7 @@ public class EventView : MonoBehaviour
                         await _textView.Skip();
                     }
 
-                    await _gssReader.GetFromWeb(t.SheetName);
+                    await _gssReader.GetFromWeb(_sheetName[t.SheetName]);
                     _textView.ChangeLine(t.LaneNum);
                 }
 
@@ -97,12 +128,16 @@ public class EventView : MonoBehaviour
                     _soundManager.StopAudio();
                 }
 
-                if(EventAction.PAUSE_BGM == t.Action[i])
+                if (EventAction.PAUSE_BGM == t.Action[i])
                 {
-                    Debug.Log($"{t.BGM} pause");
+                    Debug.Log($"Pause BGM {t.BGM}");
+                }
+
+                if (EventAction.NONE == t.Action[i])
+                {
+                    Debug.Log("");
                 }
             }
         }
     }
-
 }
