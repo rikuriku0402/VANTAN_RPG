@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField]
     private AudioSource _audioSource;
 
     void Start()
@@ -24,13 +23,13 @@ public class SoundManager : MonoBehaviour
     /// <summary>Audio‚ğ—¬‚·</summary>
     public void PlayAudio() => _audioSource.Play();
 
-    /// <summary>—¬‚ê‚Ä‚éAudio~‚ß‚é</summary>
+    /// <summary>—¬‚ê‚Ä‚éAudio‚ğ~‚ß‚é</summary>
     public void StopAudio() => _audioSource.Stop();
 
     /// <summary>—¬‚ê‚Ä‚éAudio‚ğˆê’â~‚³‚¹‚é</summary>
     public void PauseAudio() => _audioSource.Pause();
 
     /// <summary>Audio‚ğˆê“x‚¾‚¯Ä¶‚·‚é</summary>
-    /// <param name="se">Ä¶‚µ‚½‚¢SE</param>
+    /// <param name="se">Ä¶‚µ‚½‚¢Audio</param>
     public void PlaySeAudio(AudioClip se) => _audioSource.PlayOneShot(se);
 }

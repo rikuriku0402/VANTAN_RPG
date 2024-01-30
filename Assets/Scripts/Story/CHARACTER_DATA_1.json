@@ -1,0 +1,10 @@
+{
+    "name": "水スライム",
+    "hp": 750,
+    "atk": 100,
+    "def": 75,
+    "magicAtk": 0,
+    "magicDef": 0,
+    "speed": 0,
+    "type": ""
+}

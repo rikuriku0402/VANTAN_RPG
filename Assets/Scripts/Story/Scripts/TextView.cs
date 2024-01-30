@@ -54,6 +54,7 @@ public class TextView : MonoBehaviour
 
 
     [SerializeField]
+    [Header("")]
     private bool _isAuto = false;
 
     [SerializeField]
@@ -68,7 +69,8 @@ public class TextView : MonoBehaviour
 
         _lineNum
             .Skip(1)
-            .Subscribe(CoText).AddTo(this);
+            .Subscribe(CoText)
+            .AddTo(this);
 
         await UniTask.WaitUntil(() => !_gssReader.IsLoading, cancellationToken: token);
         CoText(_lineNum.Value);
@@ -76,7 +78,7 @@ public class TextView : MonoBehaviour
     
     /// <summary>GSSを上から一行ずつ出力</summary>
     public async void CoText(int value)
-{
+    {
         var data = _gssReader.Datas;
         if(data.Length == value) return;
         Debug.Log($"{value}行目");
