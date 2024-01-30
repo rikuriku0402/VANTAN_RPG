@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,44 +12,41 @@ public class CharacterChange : MonoBehaviour
     
     [SerializeField]
     [Header("キャラクター一覧")]
-    private List<Sprite> _characterList;
+    private List<Sprite> _characterSpriteList;
     
     [SerializeField]
     [Header("キャラクター変化ボタン")]
     private List<Button> _charaChangeButton;
-
-    private const int LINE = 0;
     
-    void Start()
+    [SerializeField]
+    [Header("キャラクター")]
+    private List<GameObject> _charaList;
+
+    private void Start()
     {
         int charaNum = 0;
-        
-        _characterImage.sprite = _characterList[charaNum];
+
+        _characterImage.sprite = _characterSpriteList[charaNum];
         for (int i = 0; i < _charaChangeButton.Count; i++)
         {
+            if (_charaChangeButton[i] == null) return;
+            
+            _charaList[i].SetActive(false);
             var i1 = i;
-            _charaChangeButton[i].onClick.AddListener(() => StatusChange(i1));
             _charaChangeButton[i].onClick.AddListener(() => CharaChange(i1));
         }
-    }
-
-    
-    private void StatusChange(int charaNum)
-    {
-        Debug.Log("Status" + charaNum);
-        // _characterStatus[charaNum].name = /*読み取ったデータの変数*/[charaNum][/*名前の欄*/];
-        // _characterStatus[charaNum].hp = /*読み取ったデータの変数*/[charaNum][/*名前の欄*/];
-        // _characterStatus[charaNum].attack = 
-        // _characterStatus[charaNum].defense = 
-        // _characterStatus[charaNum].magicAttack = 
-        // _characterStatus[charaNum].magicDefense = 
-        // _characterStatus[charaNum].speed = 
-        // _characterStatus[charaNum].type = CharacterStatus.Type.FIRE;
+        
+        _charaList[charaNum].SetActive(true);
     }
 
     private void CharaChange(int charaNum)
     {
+        _charaList.ForEach(x => x.gameObject.SetActive(false));
+        
         Debug.Log("Character" + charaNum);
-        _characterImage.sprite = _characterList[charaNum];
+        _charaList[charaNum].SetActive(true);
+        _characterImage.sprite = _characterSpriteList[charaNum];
+        
+        Debug.Log(_charaList[charaNum]);
     }
 }

@@ -64,6 +64,6 @@ public class SceneLoader : MonoBehaviour
     
     private void SceneChange(SceneName typeName)
     {
-        SceneManager.LoadScene(_typeToName[typeName]);
+        SceneManager.LoadSceneAsync(_typeToName[typeName]);
     }
 }

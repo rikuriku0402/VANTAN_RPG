@@ -1,91 +1,130 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Unit : MonoBehaviour
 {
-    public CharacterStatus CharacterStatuList => _characterStatuList;
+    public CharacterStatus CharacterStatusList => _characterStatusList;
     
     [SerializeField]
     [Header("HPスライダー")]
     private Slider _hpSlider;
     
     [SerializeField]
-    [Header("キャラクターのステータス")]
-    private CharacterStatus _characterStatuList;
-    
-    [SerializeField]
     [Header("GSSReader")]
     private GSSReader _gssReader;
     
     [SerializeField]
-    private CharaName _charaName;
+    private CharacterStatus _characterStatusList;
     
     [SerializeField]
-    private int _nameLine;
+    [Header("バトルマネージャー")]
+    private BattleManager _battleManager;
     
     [SerializeField]
-    private int _hpLine;
-    
-    [SerializeField]
-    private int _attackLine;
-    
-    [SerializeField]
-    private int _defenseLine;
-    
-    [SerializeField]
-    private int _magicAttackLine;
-    
-    [SerializeField]
-    private int _magicDefenseLine;
-    
-    [SerializeField]
-    private int _speedLine;
-    
-    [SerializeField]
-    private int _maxHpLine;
-    
-    async void Start()
-    {
-        await WaitRoad();
+    [Header("HPテキスト")]
+    private Text _hpText;
 
-        _characterStatuList.hp = _characterStatuList.maxHp;
-        _hpSlider.maxValue = _characterStatuList.maxHp;
-        _hpSlider.value = _characterStatuList.hp;
+    [SerializeField]
+    private int _charaNum;
+    
+    [SerializeField]
+    private bool _isEnemy;
+    
+    [SerializeField]
+    [Header("キャラクタースプライト")]
+    private CharacterSprite _characterSprite;
+    
+    private const int NAMELINE = 0;
+    
+    private const int HPLINE = 1;
+    
+    private const int ATTACKLINE = 2;
+    
+    private const int DEFENSELINE = 3;
+    
+    private const int MAGICATTACKLINE = 4;
+    
+    private const int MAGICDEFENSELINE = 5;
+    
+    private const int SPEEDLINE = 6; 
+    
+    private int _maxHp;
+    
+    private CancellationToken token;
+    
+    
+    private async void Start()
+    {
+        Debug.Log("ロード開始");
+        
+        await WaitRoad();
+        _characterStatusList.hp = _characterStatusList.hp;
+        _hpSlider.maxValue = _characterStatusList.hp;
+        _hpSlider.value = _characterStatusList.hp;
+        
+        _maxHp = _characterStatusList.hp;
+        
+        _hpText.text = _characterStatusList.hp + "/" + _maxHp;
     }
 
     private async UniTask WaitRoad()
-    {
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
-        string name = _gssReader.Datas[1][_nameLine];
+    { 
+        token = this.GetCancellationTokenOnDestroy();
+        await UniTask.WaitUntil(() => !_gssReader.IsLoading, cancellationToken: token);
         
-        Debug.Log($"名前{_characterStatuList.name = _gssReader.Datas[1][_nameLine]}");
-        Debug.Log($"HP{_characterStatuList.hp = int.Parse(_gssReader.Datas[1][_hpLine])}");
-        Debug.Log($"物理攻撃力{_characterStatuList.attack = int.Parse(_gssReader.Datas[1][_attackLine])}");
-        Debug.Log($"物理防御力{_characterStatuList.defense = int.Parse(_gssReader.Datas[1][_defenseLine])}");
-        Debug.Log($"魔法攻撃力{_characterStatuList.magicAttack = int.Parse(_gssReader.Datas[1][_magicAttackLine])}");
-        Debug.Log($"魔法防御力{_characterStatuList.magicDefense = int.Parse(_gssReader.Datas[1][_magicDefenseLine])}");
-        Debug.Log($"素早さ{_characterStatuList.speed = int.Parse(_gssReader.Datas[1][_speedLine])}");
-        // Debug.Log(_characterStatuList.maxHp = int.Parse(_gssReader.Datas[1][_maxHpLine]));
+        _characterStatusList.name = _gssReader.Datas[_charaNum][NAMELINE];
+        _characterStatusList.hp = int.Parse(_gssReader.Datas[_charaNum][HPLINE]);
+        _characterStatusList.attack = int.Parse(_gssReader.Datas[_charaNum][ATTACKLINE]);
+        _characterStatusList.defense = int.Parse(_gssReader.Datas[_charaNum][DEFENSELINE]);
+        _characterStatusList.magicAttack = int.Parse(_gssReader.Datas[_charaNum][MAGICATTACKLINE]);
+        _characterStatusList.magicDefense = int.Parse(_gssReader.Datas[_charaNum][MAGICDEFENSELINE]);
+        _characterStatusList.speed = int.Parse(_gssReader.Datas[_charaNum][SPEEDLINE]);
+
+        if (_isEnemy)
+        {
+            int random = Random.Range(2, 4);
+            
+            _characterStatusList.name = _gssReader.Datas[random][NAMELINE];
+            _characterStatusList.hp = int.Parse(_gssReader.Datas[random][HPLINE]);
+            _characterStatusList.attack = int.Parse(_gssReader.Datas[random][ATTACKLINE]);
+            _characterStatusList.defense = int.Parse(_gssReader.Datas[random][DEFENSELINE]);
+            _characterStatusList.magicAttack = int.Parse(_gssReader.Datas[random][MAGICATTACKLINE]);
+            _characterStatusList.magicDefense = int.Parse(_gssReader.Datas[random][MAGICDEFENSELINE]);
+            _characterStatusList.speed = int.Parse(_gssReader.Datas[random][SPEEDLINE]);
+            
+            _characterSprite.EnemyImageRoad(random);
+        }
+
+        Debug.Log("名前" + _characterStatusList.name);
+        Debug.Log("HP" + _characterStatusList.hp);
+        Debug.Log("物理攻撃力" + _characterStatusList.attack);
+        Debug.Log("物理防御力" + _characterStatusList.defense);
+        Debug.Log("魔法攻撃力" + _characterStatusList.magicAttack);
+        Debug.Log("魔法防御力" + _characterStatusList.magicDefense);
+        Debug.Log("素早さ" + _characterStatusList.speed);
+        
+        _battleManager.gameObject.SetActive(true);
     }
 
     public void OnDamage(int damage)
     {
-        // RandomAction();
-        _characterStatuList.hp -= damage;
+        _characterStatusList.hp -= damage;
         Debug.Log(damage);
-        if (_characterStatuList.hp <= 0)
-        {
-            _characterStatuList.hp = 0;
-            Debug.Log("バトル終了");
-        }
-        // Debug.Log(_characterStatuList.type = int.Parse(_gssReader.Datas[0][_nameLine]));
         
-        _hpSlider.value = _characterStatuList.hp;
+        _hpSlider.value = _characterStatusList.hp;
+        _hpText.text = _characterStatusList.hp + "/" + _maxHp;
+
+        if (_characterStatusList.hp <= 0)
+        {
+            _hpSlider.value = 0;
+            _hpText.text = 0 + "/" + _maxHp;
+            Debug.Log(_characterStatusList.name + "は死んだ");
+        }
     }
 }
 
@@ -96,7 +135,7 @@ public class CharacterStatus
     
     public int hp;
     
-    public int maxHp;
+    // public int maxHp;
 
     public int attack;
     
@@ -109,7 +148,7 @@ public class CharacterStatus
     public int speed;
 
     public Type type;
-
+    
     public enum Type
     {
         FIRE,
