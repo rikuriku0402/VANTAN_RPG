@@ -9,6 +9,8 @@ using Cysharp.Threading.Tasks;
 
 public class EnemyEncount : MonoBehaviour
 {
+    public bool _konaideRock = false;
+
     void Start()
     {
         int rnd = UnityEngine.Random.Range(1, 11); // ※ 1～9の範囲でランダムな整数値が返る
@@ -26,7 +28,6 @@ public class EnemyEncount : MonoBehaviour
 
     private async void OnTriggerStay2D(Collider2D collision)
     {
-        bool _konaideRock = false;
         if(collision.gameObject.tag == "Player"&& _konaideRock==false)
         {
             Debug.Log("テスト");

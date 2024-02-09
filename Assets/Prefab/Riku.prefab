@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 49220973817370945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 49220975360528365}
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 2a90d1b0836c23c4988b0b12159cb84f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   _rightRiku: {fileID: 21300000, guid: e909868a7e1ac0a4da658ba1b020a4ec, type: 3}
   _leftRiku: {fileID: 21300000, guid: c5dfed30a1e391b479739f5208231469, type: 3}
   _kurunaRiku: {fileID: 21300000, guid: 02c54be228922ab45a47dfa5fd03c87c, type: 3}
+  _enemySpown: {fileID: 0}
 --- !u!1 &49220975360528362
 GameObject:
   m_ObjectHideFlags: 0
