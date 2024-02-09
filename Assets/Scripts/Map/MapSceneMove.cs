@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class MapSceneMove : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int _playerMapPosX = 0;
     public static int _playerMapPosY =0;
+
+    public static string _maeScene;
+
+    [SerializeField]
+    PlayerController _playerController;
 
     [SerializeField]
     Exit_TYPE _type;
@@ -33,6 +39,7 @@ public class MapSceneMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            _maeScene = SceneManager.GetActiveScene().name;
             switch (_type)
             {
                 case Exit_TYPE.UP:
@@ -58,6 +65,7 @@ public class MapSceneMove : MonoBehaviour
             {
                 if (t.Xpoint != _playerMapPosX) continue;
                 if (t.Ypoint != _playerMapPosY) continue;
+                _playerController.moveSpeed = 0;
                 Debug.Log(t.Test);
 
                 await _sceneLoader.FadeIn(t.Test);

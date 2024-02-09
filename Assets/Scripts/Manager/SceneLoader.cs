@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     [Header("間隔")]
     private float _duration;
-    
+
     private Dictionary<SceneName, string> _typeToName = new()
     {
         [SceneName.Unknown] = "",
@@ -23,6 +23,7 @@ public class SceneLoader : MonoBehaviour
         [SceneName.GameOver] = "GameOver",
         [SceneName.GameClear] = "GameClear",
 
+        [SceneName.Syoki] = "Teat_tileScene",
         [SceneName.Oikawa] = "Oikawa",
         [SceneName.Est] = "Est",
         [SceneName.Zyosi] = "Zyosi",
@@ -48,6 +49,7 @@ public class SceneLoader : MonoBehaviour
         Zyosi,
         Ippan,
         Abe,
+        Syoki,
     }
 
     public async UniTask FadeIn(SceneName typeName)
