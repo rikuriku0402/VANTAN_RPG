@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyEncount : MonoBehaviour
 {
     [SerializeField]
-    [Header("ƒV[ƒ“ƒ[ƒ_[")]
+    [Header("ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ€ãƒ¼")]
     private SceneLoader _sceneLoader;
 
     [SerializeField]
@@ -15,7 +15,8 @@ public class EnemyEncount : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("“G‚É“–‚½‚Á‚½");
+
+            Debug.Log("æ•µã«å½“ãŸã£ãŸ");
            await _sceneLoader.FadeIn(_sceneName);
         }
     }

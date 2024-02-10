@@ -477,7 +477,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
   _clickable: 1
   textSpeed: 0.1
   _textDisplayTime: 3
-  _textSe: {fileID: 8300000, guid: 71bd3b7ea5904f146b547a6910149e2b, type: 3}
+  _textSe: {fileID: 0}
   _gssReader: {fileID: 1973886248}
   _isAuto: 0
   _isPlaying: 0

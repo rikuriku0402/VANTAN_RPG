@@ -47,6 +47,8 @@ public class EventView : MonoBehaviour
         [EventName.EST_BGM] = "ESTマップBGM",
         [EventName.GIRL_BGM] = "女子マップBGM",
         [EventName.OIKAWA_BGM] = "及川マップBGM",
+        [EventName.CHANGE_HIGHSCHOOL] = "飛ばしたいscene",
+        [EventName.CHANGE_OIKAWA] = "飛ばしたいscene"
     };
 
 
@@ -131,6 +133,11 @@ public class EventView : MonoBehaviour
                 if (EventAction.PAUSE_BGM == t.Action[i])
                 {
                     Debug.Log($"Pause BGM {t.BGM}");
+                }
+
+                if(EventAction.CHANGE_SCENE == t.Action[i])
+                {
+                    Debug.Log(_eventName[t.EventName]);
                 }
 
                 if (EventAction.NONE == t.Action[i])

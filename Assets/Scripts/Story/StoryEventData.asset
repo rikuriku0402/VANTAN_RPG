@@ -13,25 +13,30 @@ MonoBehaviour:
   m_Name: StoryEventData
   m_EditorClassIdentifier: 
   _event:
-  - _eventName: "\u30D9\u30EB\u306E\u5927\u5B66\u5165\u53E3"
+  - _event: 
+    _eventName: 0
     _sheetName: 1
     _laneNum: 1
     _effect:
     - {fileID: 0}
-    _se:
-    - {fileID: 0}
+    _se: {fileID: 0}
     _bgm: {fileID: 0}
     _eventAction: 01000000
-  - _eventName: "\u308A\u304F"
+  - _event: 
+    _eventName: 0
     _sheetName: 0
     _laneNum: 1
     _effect:
     - {fileID: 0}
-    _se:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    _se: {fileID: 0}
     _bgm: {fileID: 0}
     _eventAction: 01000000
+  - _event: 
+    _eventName: 9
+    _sheetName: 0
+    _laneNum: 1
+    _effect:
+    - {fileID: 0}
+    _se: {fileID: 0}
+    _bgm: {fileID: 0}
+    _eventAction: 07000000

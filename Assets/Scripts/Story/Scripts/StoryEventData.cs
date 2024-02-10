@@ -66,6 +66,7 @@ public enum EventAction
     PLAY_BGM,
     STOP_BGM,
     PAUSE_BGM,
+    CHANGE_SCENE,
 }
 
 public enum EventName
@@ -78,7 +79,10 @@ public enum EventName
     HIGHSCHOOL_BGM,
     EST_BGM,
     GIRL_BGM,
-    OIKAWA_BGM
+    OIKAWA_BGM,
+    CHANGE_OIKAWA,
+    CHANGE_HIGHSCHOOL,
+
 }
 
 public enum SheetName
