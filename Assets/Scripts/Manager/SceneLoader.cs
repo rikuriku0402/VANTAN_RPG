@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public SceneName SceneNames => _sceneName; 
+    
     [SerializeField]
     [Header("CanvasGroup")]
     private CanvasGroup _canvasGroup;
@@ -14,6 +16,8 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     [Header("間隔")]
     private float _duration;
+    
+    private SceneName _sceneName;
     
     private Dictionary<SceneName, string> _typeToName = new()
     {
