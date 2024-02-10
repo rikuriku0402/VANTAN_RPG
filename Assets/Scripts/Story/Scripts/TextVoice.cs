@@ -64,7 +64,7 @@ public class TextVoice : MonoBehaviour
     {
         foreach (var t in _charaVoice.CharaVoice)
         {
-            if (t.Voice == null) return;
+            if (t.Voice== null) return;
 
             if (_charaName[t.CharacterName] == name)
             {
