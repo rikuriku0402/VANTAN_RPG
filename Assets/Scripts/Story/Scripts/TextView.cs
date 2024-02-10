@@ -147,4 +147,6 @@ public class TextView : MonoBehaviour
     /// </summary>
     /// <param name="num">行数</param>
     public void ChangeLine(int num) => _lineNum.Value = num;
+
+    public void ChangeClickee(bool isClick) => _clickable = isClick;
 }
