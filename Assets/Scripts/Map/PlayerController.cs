@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniRx;
+using UniRx.Triggers;
+using System;
+using Cysharp.Threading.Tasks;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private float horizontal;                    // x 軸(水平・横)方向の入力の値の代入用
     private float vertical;                      // y 軸(垂直・縦)方向の入力の値の代入用
 
+    
+    public static Vector3 _playerPos = new();
+
     [SerializeField]
     Sprite _frontRiku;
     [SerializeField]
@@ -25,13 +31,37 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Sprite _kurunaRiku;
+
+    [SerializeField]
+    EnemySpown _enemySpown;
     private SpriteRenderer _spriteRenderer;
 
-    void Start()
+    async void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         // このスクリプトがアタッチされているゲームオブジェクトにアタッチされているコンポーネントの中から、<指定>したコンポーネントの情報を取得して、左辺に用意した変数に代入
         rb = GetComponent<Rigidbody2D>();     // あるいは、TryGeyComponent(out rb);　でも可
+        _enemySpown._konaideRock = true;
+
+        switch (MapSceneMove._maeScene)
+        {
+            case "EST":
+                this.gameObject.transform.position=new Vector3(17, 2.5f, 0);
+                break;
+            case "Ippan":
+                this.gameObject.transform.position = new Vector3(0.5f, 12, 0);
+                break;
+            case "Oikawa":
+                this.gameObject.transform.position = new Vector3(-17, 2.5f, 0);
+                break;
+            case "zyosi":
+                this.gameObject.transform.position = new Vector3(0.5f, -6, 0);
+                break;
+            default:
+
+                break;
+        }
+        await Wait(5);
     }
 
     void Update()
@@ -89,5 +119,11 @@ public class PlayerController : MonoBehaviour
 
         // velocity(速度)に新しい値を代入して、ゲームオブジェクトを移動させる
         rb.velocity = dir * moveSpeed;
+    }
+    private async UniTask Wait(int time)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(time));
+        _enemySpown._konaideRock = false;
+
     }
 }

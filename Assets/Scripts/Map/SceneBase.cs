@@ -13,13 +13,13 @@ public class SceneBase : ScriptableObject
     public List<SceneBaseObj> ST_scenebase => _scenebase;
 }
 [System.Serializable]
-public class SceneBaseObj   
+public class SceneBaseObj
 {
     public int Xpoint => _Xpoint;
     public int Ypoint => _Ypoint;
 
-    public SceneLoader.SceneName Test => _test; 
-   
+    public SceneLoader.SceneName Test => _test;
+
     [SerializeField]
     private SceneLoader.SceneName _test;
 
@@ -30,5 +30,5 @@ public class SceneBaseObj
     int _Ypoint;
 
 
- 
+
 }
