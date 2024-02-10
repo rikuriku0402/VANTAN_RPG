@@ -106344,6 +106344,7 @@ GameObject:
   - component: {fileID: 882049453}
   - component: {fileID: 882049452}
   - component: {fileID: 882049454}
+  - component: {fileID: 882049455}
   m_Layer: 0
   m_Name: boss
   m_TagString: Untagged
@@ -106573,6 +106574,20 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &882049455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882049450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8790d942e806240b190e7483a3397a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  _playerController: {fileID: 2131042073}
 --- !u!1001 &1283847424
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,25 +16,12 @@ MonoBehaviour:
   - _test: 10
     _Xpoint: 0
     _Ypoint: 0
-    _spownXpoint: 0
-    _spownYpoint: 0
-  - _test: 8
-    _Xpoint: 0
-    _Ypoint: 1
-    _spownXpoint: 0
-    _spownYpoint: 0
-  - _test: 7
-    _Xpoint: 0
-    _Ypoint: -1
-    _spownXpoint: 0
-    _spownYpoint: 0
   - _test: 5
     _Xpoint: -1
     _Ypoint: 0
-    _spownXpoint: 0
-    _spownYpoint: 0
-  - _test: 6
+  - _test: 8
     _Xpoint: 1
     _Ypoint: 0
-    _spownXpoint: 19
-    _spownYpoint: -47
+  - _test: 7
+    _Xpoint: 0
+    _Ypoint: 1

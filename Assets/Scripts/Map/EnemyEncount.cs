@@ -30,7 +30,7 @@ public class EnemyEncount : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player"&& _konaideRock==false)
         {
-            Debug.Log("テスト");
+            //Debug.Log("テスト");
             int rnd = UnityEngine.Random.Range(1, 11);
             if(rnd == 7)
             {
