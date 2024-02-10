@@ -11,32 +11,37 @@ public class GameManager : MonoBehaviour
     [Header("SceneLoader")]
     private SceneLoader _sceneLoader;
     
-    private bool _isGame;// Falseならゲームオーバー
+    private bool _isGame = true;// Falseならゲームオーバー
 
     private void Start()
     {
         _sceneLoader.FadeOut();
     }
 
+    private async void Update()
+    {
+        await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+        MapSceneMove._playerMapPosX = 0;
+        MapSceneMove._playerMapPosY = 0;
+    }
+
     public async void GameClear()
     {
-        _isGame = true;
-        
         if (_isGame)
         {
+            _isGame = false;
             await _sceneLoader.FadeIn(SceneLoader.SceneName.GameClear);
+            Debug.Log("クリア");
         }
     }
 
     public async void GameOver()
     {
-        _isGame = false;
-
         if (!_isGame)
         {
+            _isGame = true;
             await _sceneLoader.FadeIn(SceneLoader.SceneName.GameOver);
+            Debug.Log("ゲームオーバー");
         }
     }
-    
-    public bool GameModeChange(bool isGame) => _isGame = isGame;
 }

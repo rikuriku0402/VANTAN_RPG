@@ -1,50 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
-using UniRx.Triggers;
-using System;
-using Cysharp.Threading.Tasks;
-    
 
 public class EnemyEncount : MonoBehaviour
 {
-    public bool _konaideRock = false;
+    [SerializeField]
+    [Header("ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ€ãƒ¼")]
+    private SceneLoader _sceneLoader;
 
-    void Start()
-    {
-        int rnd = UnityEngine.Random.Range(1, 11); // ¦ 1`9‚Ì”ÍˆÍ‚Åƒ‰ƒ“ƒ_ƒ€‚È®”’l‚ª•Ô‚é
-    }
+    [SerializeField]
+    SceneLoader.SceneName _sceneName;
 
-    private void FixedUpdate()
+    private async void OnTriggerEnter2D(Collider2D collision)
     {
-        Encount();
-    }
-
-    private void Encount()
-    {
-        
-    }
-
-    private async void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Player"&& _konaideRock==false)
+        if(collision.gameObject.tag == "Player")
         {
-            //Debug.Log("ƒeƒXƒg");
-            int rnd = UnityEngine.Random.Range(1, 11);
-            if(rnd == 7)
-            {
-                //“G‚É‚ ‚½‚éˆ—
-            }
-            
+
+            Debug.Log("æ•µã«å½“ãŸã£ãŸ");
+           await _sceneLoader.FadeIn(_sceneName);
         }
-    }
-
-    private async UniTask Wait(int time)
-    {
-        await UniTask.Delay(TimeSpan.FromSeconds(time));
-        // Às‚µ‚½‚¢‚à‚Ì await Wait(5);
-
     }
 }
 

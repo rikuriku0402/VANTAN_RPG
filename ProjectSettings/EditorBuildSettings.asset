@@ -18,8 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Map/Oikawa.unity
     guid: f8ce8bc68be3a4f42909e4ede2707868
   - enabled: 1
+    path: Assets/Scenes/Battle_Veru.unity
+    guid: 86f23b63887281d4893e5a214b2e2ed6
+  - enabled: 1
     path: Assets/Scenes/Map/EST.unity
     guid: 1d9d6d721f1196945afbed811fbadeb7
+  - enabled: 1
+    path: Assets/Scenes/Battle_Zako.unity
+    guid: 5ee7413df92a9004087887c6ba1de261
+  - enabled: 1
+    path: Assets/Scenes/Battle_Oikawa.unity
+    guid: f67a34cf337f77740a3197cf94a3bcfa
   - enabled: 1
     path: Assets/Scenes/Map/Ippan.unity
     guid: b3d9aa985d34a2849817fd3ff1fc50fe

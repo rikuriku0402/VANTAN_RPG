@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Assets/Font/cinecaption2.26/cinecaption2.26.txt" charset="windows-31j" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Map/EnemyEncount.cs" charset="windows-31j" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Map/EnemySpown.cs" charset="windows-31j" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Map/MapSceneMove.cs" charset="windows-31j" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Map/PlayerController.cs" charset="windows-31j" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Story/Scripts/EffectManager.cs" charset="windows-31j" />
+  </component>
+</project>

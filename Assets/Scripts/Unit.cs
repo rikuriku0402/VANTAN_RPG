@@ -1,95 +1,153 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    public int HP => _hp;
-    
-    public int MaxHP => _maxHp;
-    
-    public int Attack => _attack;
-    
-    public int MagicAttack => _magicAttack;
+    public CharacterStatus CharacterStatusList => _characterStatusList;
     
     [SerializeField]
     [Header("HPスライダー")]
     private Slider _hpSlider;
     
     [SerializeField]
-    [Header("攻撃力")]
-    private int _attack;
+    [Header("GSSReader")]
+    private GSSReader _gssReader;
     
     [SerializeField]
-    [Header("魔法攻撃")]
-    private int _magicAttack;
+    private CharacterStatus _characterStatusList;
     
     [SerializeField]
-    [Header("マックスHP")]
-    private int _maxHp = 100;
+    [Header("バトルマネージャー")]
+    private BattleManager _battleManager;
     
     [SerializeField]
-    [Header("HP")]
-    private int _hp;
+    [Header("HPテキスト")]
+    private Text _hpText;
     
     [SerializeField]
-    [Header("キャラクターのレベル")]
-    private Level _level;
-    
-    private enum Level
-    {
-        LEVEL1,
-        LEVEL2,
-        LEVEL3,
-        LEVEL4
-    }
-    
-    void Start()
-    {
-        _hp = _maxHp;
-        _hpSlider.maxValue = _maxHp;
-        _hpSlider.value = _hp;
-    }
+    [Header("名前テキスト")]
+    private Text _nameText;
 
-    public void OnDamage(int damage)
+    [SerializeField]
+    private int _charaNum;
+    
+    [SerializeField]
+    [Header("キャラクタースプライト")]
+    private CharacterSprite _characterSprite;
+    
+    private const int NAMELINE = 0;
+    
+    private const int HPLINE = 1;
+    
+    private const int ATTACKLINE = 2;
+    
+    private const int DEFENSELINE = 3;
+    
+    private const int MAGICATTACKLINE = 4;
+    
+    private const int MAGICDEFENSELINE = 5;
+    
+    private const int SPEEDLINE = 6; 
+    
+    private int _maxHp;
+    
+    private CancellationToken token;
+    
+    
+    private async void Start()
     {
-        RandomAction();
-        _hp -= damage;
-        Debug.Log(_hp);
-        Debug.Log(damage);
-        if (_hp <= 0)
-        {
-            _hp = 0;
-            Debug.Log("バトル終了");
-        }
+        Debug.Log("ロード開始");
         
-        _hpSlider.value = _hp;
+        await WaitRoad();
+        _characterStatusList.hp = _characterStatusList.hp;
+        _hpSlider.maxValue = _characterStatusList.hp;
+        _hpSlider.value = _characterStatusList.hp;
+        
+        _maxHp = _characterStatusList.hp;
+        
+        _hpText.text = _characterStatusList.hp + "/" + _maxHp;
     }
 
-    private void RandomAction()
+    private async UniTask WaitRoad()
+    { 
+        token = this.GetCancellationTokenOnDestroy();
+        await UniTask.WaitUntil(() => !_gssReader.IsLoading, cancellationToken: token);
+        
+        _characterStatusList.name = _gssReader.Datas[_charaNum][NAMELINE];
+        _characterStatusList.hp = int.Parse(_gssReader.Datas[_charaNum][HPLINE]);
+        _characterStatusList.attack = int.Parse(_gssReader.Datas[_charaNum][ATTACKLINE]);
+        _characterStatusList.defense = int.Parse(_gssReader.Datas[_charaNum][DEFENSELINE]);
+        _characterStatusList.magicAttack = int.Parse(_gssReader.Datas[_charaNum][MAGICATTACKLINE]);
+        _characterStatusList.magicDefense = int.Parse(_gssReader.Datas[_charaNum][MAGICDEFENSELINE]);
+        _characterStatusList.speed = int.Parse(_gssReader.Datas[_charaNum][SPEEDLINE]);
+
+        _characterStatusList.name = _nameText.text;
+
+        Debug.Log("名前" + _characterStatusList.name);
+        Debug.Log("HP" + _characterStatusList.hp);
+        Debug.Log("物理攻撃力" + _characterStatusList.attack);
+        Debug.Log("物理防御力" + _characterStatusList.defense);
+        Debug.Log("魔法攻撃力" + _characterStatusList.magicAttack);
+        Debug.Log("魔法防御力" + _characterStatusList.magicDefense);
+        Debug.Log("素早さ" + _characterStatusList.speed);
+
+        _battleManager.gameObject.SetActive(true);
+    }
+
+    public async void OnDamage(int damage)
     {
-        switch (_level)
+        _characterStatusList.hp -= damage;
+        Debug.Log(damage);
+        
+        _hpSlider.value = _characterStatusList.hp;
+        _hpText.text = _characterStatusList.hp + "/" + _maxHp;
+
+        if (_characterStatusList.hp <= 0)
         {
-            case Level.LEVEL1:
-                _attack = Random.Range(5,10);
-                _magicAttack = Random.Range(20,30);
-                break;
+            _hpSlider.value = 0;
+            _hpText.text = 0 + "/" + _maxHp;
             
-            case Level.LEVEL2:
-                _attack = Random.Range(10,20);        
-                _magicAttack = Random.Range(30,40);
-                break;
-            
-            case Level.LEVEL3:
-                _attack = Random.Range(20,30);
-                _magicAttack = Random.Range(40,50);
-                break;
-            
-            case Level.LEVEL4:
-                _attack = Random.Range(40,50);
-                _magicAttack = Random.Range(50,60);
-                break;
+            // await DeathPlayerAsync();
+            Debug.Log(_characterStatusList.name + "は死んだ");
         }
+    }
+
+    private async UniTask DeathPlayerAsync()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(2f));
+    }
+
+}
+
+[System.Serializable]
+public class CharacterStatus
+{
+    public string name;
+    
+    public int hp;
+    
+    // public int maxHp;
+
+    public int attack;
+    
+    public int defense;
+    
+    public int magicAttack;
+    
+    public int magicDefense;
+    
+    public int speed;
+
+    public Type type;
+    
+    public enum Type
+    {
+        FIRE,
+        WATER,
+        TREE,
     }
 }

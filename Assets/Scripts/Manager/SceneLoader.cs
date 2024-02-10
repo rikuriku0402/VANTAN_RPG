@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public SceneName SceneNames => _sceneName; 
+    
     [SerializeField]
     [Header("CanvasGroup")]
     private CanvasGroup _canvasGroup;
@@ -14,16 +16,20 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     [Header("間隔")]
     private float _duration;
-
+    
+    private SceneName _sceneName;
+    
     private Dictionary<SceneName, string> _typeToName = new()
     {
         [SceneName.Unknown] = "",
         [SceneName.Title] = "Title",
         [SceneName.Game] = "Game",
+        [SceneName.Battle_Oikawa] = "Battle_Oikawa",
+        [SceneName.Battle_Veru] = "Battle_Veru",
+        [SceneName.Battle_Zako] = "Battle_Zako",
         [SceneName.GameOver] = "GameOver",
         [SceneName.GameClear] = "GameClear",
 
-        [SceneName.Syoki] = "Teat_tileScene",
         [SceneName.Oikawa] = "Oikawa",
         [SceneName.Est] = "Est",
         [SceneName.Zyosi] = "Zyosi",
@@ -42,6 +48,10 @@ public class SceneLoader : MonoBehaviour
         Unknown,
         Title,
         Game,
+        Battle,
+        Battle_Veru,
+        Battle_Oikawa,
+        Battle_Zako,
         GameOver,
         GameClear,
         Oikawa,
@@ -49,7 +59,6 @@ public class SceneLoader : MonoBehaviour
         Zyosi,
         Ippan,
         Abe,
-        Syoki,
     }
 
     public async UniTask FadeIn(SceneName typeName)
@@ -66,6 +75,6 @@ public class SceneLoader : MonoBehaviour
     
     private void SceneChange(SceneName typeName)
     {
-        SceneManager.LoadScene(_typeToName[typeName]);
+        SceneManager.LoadSceneAsync(_typeToName[typeName]);
     }
 }
