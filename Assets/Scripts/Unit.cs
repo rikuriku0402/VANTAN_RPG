@@ -4,7 +4,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class Unit : MonoBehaviour
 {
@@ -28,12 +27,13 @@ public class Unit : MonoBehaviour
     [SerializeField]
     [Header("HPテキスト")]
     private Text _hpText;
+    
+    [SerializeField]
+    [Header("名前テキスト")]
+    private Text _nameText;
 
     [SerializeField]
     private int _charaNum;
-    
-    [SerializeField]
-    private bool _isEnemy;
     
     [SerializeField]
     [Header("キャラクタースプライト")]
@@ -85,20 +85,7 @@ public class Unit : MonoBehaviour
         _characterStatusList.magicDefense = int.Parse(_gssReader.Datas[_charaNum][MAGICDEFENSELINE]);
         _characterStatusList.speed = int.Parse(_gssReader.Datas[_charaNum][SPEEDLINE]);
 
-        if (_isEnemy)
-        {
-            int random = Random.Range(2, 4);
-            
-            _characterStatusList.name = _gssReader.Datas[random][NAMELINE];
-            _characterStatusList.hp = int.Parse(_gssReader.Datas[random][HPLINE]);
-            _characterStatusList.attack = int.Parse(_gssReader.Datas[random][ATTACKLINE]);
-            _characterStatusList.defense = int.Parse(_gssReader.Datas[random][DEFENSELINE]);
-            _characterStatusList.magicAttack = int.Parse(_gssReader.Datas[random][MAGICATTACKLINE]);
-            _characterStatusList.magicDefense = int.Parse(_gssReader.Datas[random][MAGICDEFENSELINE]);
-            _characterStatusList.speed = int.Parse(_gssReader.Datas[random][SPEEDLINE]);
-            
-            _characterSprite.EnemyImageRoad(random);
-        }
+        _characterStatusList.name = _nameText.text;
 
         Debug.Log("名前" + _characterStatusList.name);
         Debug.Log("HP" + _characterStatusList.hp);
@@ -107,11 +94,11 @@ public class Unit : MonoBehaviour
         Debug.Log("魔法攻撃力" + _characterStatusList.magicAttack);
         Debug.Log("魔法防御力" + _characterStatusList.magicDefense);
         Debug.Log("素早さ" + _characterStatusList.speed);
-        
+
         _battleManager.gameObject.SetActive(true);
     }
 
-    public void OnDamage(int damage)
+    public async void OnDamage(int damage)
     {
         _characterStatusList.hp -= damage;
         Debug.Log(damage);
@@ -123,9 +110,17 @@ public class Unit : MonoBehaviour
         {
             _hpSlider.value = 0;
             _hpText.text = 0 + "/" + _maxHp;
+            
+            // await DeathPlayerAsync();
             Debug.Log(_characterStatusList.name + "は死んだ");
         }
     }
+
+    private async UniTask DeathPlayerAsync()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(2f));
+    }
+
 }
 
 [System.Serializable]

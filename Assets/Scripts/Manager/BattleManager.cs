@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -46,6 +47,17 @@ public class BattleManager : MonoBehaviour
     [Header("バトルテキストクラス")]
     private BattleText _battleText;
     
+    [SerializeField]
+    [Header("バトルエフェクトクラス")]
+    private BattleEffect _battleEffect;
+    
+    [SerializeField]
+    [Header("シーンローダー")]
+    private SceneLoader _sceneLoader;
+    
+    [SerializeField]
+    SceneLoader.SceneName _sceneName;
+
     private bool _isPlayerTurn = true;
     
     private bool _isDefense = true;
@@ -55,6 +67,8 @@ public class BattleManager : MonoBehaviour
     private int _charaNum;
     
     private int _enemyAttack;
+    
+    bool isGame = false;
 
     void Start()
     {
@@ -72,15 +86,21 @@ public class BattleManager : MonoBehaviour
         _onoUnit.gameObject.SetActive(false);
     }
 
-    private void Update()
+    private async void Update()
     {
         // ゲームオーバー判定
         if (_rinkuUnit.CharacterStatusList.hp <= 0 && 
             _abeUnit.CharacterStatusList.hp <= 0 && 
             _onoUnit.CharacterStatusList.hp <= 0)
         {            
-            Debug.Log("ゲームオーバー");
-            _gameManager.GameOver();
+            if (!isGame)
+            {
+                isGame = true;
+                _gameManager.GameOver();
+                await _sceneLoader.FadeIn(_sceneName);
+                Debug.Log("ゲームオーバー");
+            }
+            return;
         }
         
         EnemyTurn();
@@ -88,7 +108,8 @@ public class BattleManager : MonoBehaviour
         if (_enemyUnit.CharacterStatusList.hp <= 0)
         {
             _gameManager.GameClear();
-            // return;
+            await _sceneLoader.FadeIn(_sceneName);
+            return;
         }
     }
 
@@ -96,6 +117,8 @@ public class BattleManager : MonoBehaviour
     {
         if (_isPlayerTurn)
         {
+            _battleEffect.PlayerAttackEffectOn();
+            
             if (_rinkuUnit.gameObject.activeSelf)
             {
                 _enemyUnit.OnDamage(_rinkuUnit.CharacterStatusList.attack);
@@ -121,6 +144,8 @@ public class BattleManager : MonoBehaviour
     {
         if (_isPlayerTurn)
         {
+            _battleEffect.PlayerAttackEffectOn();
+
             if (_rinkuUnit.gameObject.activeSelf)
             {
                 _enemyUnit.OnDamage(_rinkuUnit.CharacterStatusList.magicAttack);
@@ -147,6 +172,8 @@ public class BattleManager : MonoBehaviour
         {
             if (_isDefense)
             {
+                _battleEffect.EnemyAttackEffectOn();
+
                 if (_rinkuUnit.gameObject.activeSelf)
                 {
                     PlayerDefense(_rinkuUnit.CharacterStatusList.defense);
@@ -175,6 +202,8 @@ public class BattleManager : MonoBehaviour
         {
             if (_isDefense)
             {
+                _battleEffect.EnemyAttackEffectOn();
+
                 if (_rinkuUnit.gameObject.activeSelf)
                 {
                     PlayerDefense(_rinkuUnit.CharacterStatusList.magicDefense);
@@ -215,7 +244,9 @@ public class BattleManager : MonoBehaviour
                     _isDefense = true;
                     return;
                 }
-                    
+                
+                _battleEffect.EnemyAttackEffectOn();
+
                 if (_rinkuUnit.gameObject.activeSelf)
                 {
                     _rinkuUnit.OnDamage(_enemyUnit.CharacterStatusList.attack);

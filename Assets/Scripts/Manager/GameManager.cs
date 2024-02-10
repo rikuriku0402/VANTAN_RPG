@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
         _sceneLoader.FadeOut();
     }
 
+    private async void Update()
+    {
+        await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+        MapSceneMove._playerMapPosX = 0;
+        MapSceneMove._playerMapPosY = 0;
+    }
+
     public async void GameClear()
     {
         if (_isGame)
@@ -37,6 +44,4 @@ public class GameManager : MonoBehaviour
             Debug.Log("ゲームオーバー");
         }
     }
-    
-    public void ChangeGameMode(bool isGame) => _isGame = isGame;
 }
