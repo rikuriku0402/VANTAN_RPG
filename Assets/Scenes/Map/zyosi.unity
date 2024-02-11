@@ -7367,6 +7367,10 @@ PrefabInstance:
       value: Riku
       objectReference: {fileID: 0}
     - target: {fileID: 49220973817370946, guid: 34d9db31b675f2b47925b6b55761f272, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1354100655}
+    - target: {fileID: 49220973817370946, guid: 34d9db31b675f2b47925b6b55761f272, type: 3}
       propertyPath: _enemySpown
       value: 
       objectReference: {fileID: 1390772912}
@@ -7421,12 +7425,38 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 49220973817370946, guid: 34d9db31b675f2b47925b6b55761f272, type: 3}
   m_PrefabInstance: {fileID: 1354100652}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1354100654}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecda709cd9cf564eb3a897a6e204b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1354100654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 49220973817370945, guid: 34d9db31b675f2b47925b6b55761f272, type: 3}
+  m_PrefabInstance: {fileID: 1354100652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1354100655
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354100654}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6ed4ec4e5d2de64885c5ff566d3c2b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1390772910
 GameObject:
   m_ObjectHideFlags: 0

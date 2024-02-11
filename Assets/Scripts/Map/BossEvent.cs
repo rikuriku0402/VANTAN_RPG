@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class BossEvent : MonoBehaviour
 {
     [SerializeField]
@@ -18,8 +18,10 @@ public class BossEvent : MonoBehaviour
             switch (ID) {
 
                 case 0:
+                    SceneManager.LoadScene("OikawaScene");
                     break;
                 case 1:
+                    SceneManager.LoadScene("VelScene");
                     break;
                 case 2:
                     break;

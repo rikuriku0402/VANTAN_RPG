@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map/zyosi.unity
     guid: b1feee700c63ecd45ab85fa0e18741d8
+  - enabled: 1
+    path: Assets/Scenes/VelScene.unity
+    guid: 8d39d5cffdb8cbb44a8bccf7677cbbe1
+  - enabled: 1
+    path: Assets/Scenes/OikawaScene.unity
+    guid: b4de471bb0a842043848b477055780ad
   m_configObjects: {}
