@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OikawaScene.unity
     guid: b4de471bb0a842043848b477055780ad
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 44042a3de920f73418ea650d267e0db2
   m_configObjects: {}

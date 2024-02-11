@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: SceneData
   m_EditorClassIdentifier: 
   _scenebase:
-  - _test: 10
+  - _test: 2
     _Xpoint: 0
     _Ypoint: 0
-  - _test: 5
+  - _test: 9
     _Xpoint: -1
     _Ypoint: 0
-  - _test: 8
+  - _test: 12
     _Xpoint: 1
     _Ypoint: 0
-  - _test: 7
+  - _test: 13
     _Xpoint: 0
     _Ypoint: 1

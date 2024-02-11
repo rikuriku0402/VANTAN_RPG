@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private async void Update()
     {
-        await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+            //await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
         MapSceneMove._playerMapPosX = 0;
         MapSceneMove._playerMapPosY = 0;
     }
