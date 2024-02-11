@@ -405,7 +405,7 @@ MonoBehaviour:
   _gssReader: {fileID: 1973886248}
   _textView: {fileID: 995417580}
   _soundManager: {fileID: 889226913}
-  _charaVoice: {fileID: 0}
+  _charaVoice: {fileID: 11400000, guid: 71dc4b10d91dd0e45a6b88cbd654d067, type: 2}
   _voiceID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &792456758
 Transform:
@@ -951,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c4cd8e74c9d81342b922572d7e9e966, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 920f525e977013d4ab01663a3ec16194, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sheetID: 1mR8NpR9oVzBzroXXj5ehMmj7DeLR2etTBt8ebkv-NPs
-  _sheetName: "\u3042\u3079\u30D0\u30C8\u30EB\u524D"
+  _sheetName: "\u3042\u3079\u30D0\u30C8\u30EB\u5F8C"
 --- !u!4 &1973886249
 Transform:
   m_ObjectHideFlags: 0

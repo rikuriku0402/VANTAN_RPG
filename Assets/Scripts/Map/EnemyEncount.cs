@@ -17,7 +17,7 @@ public class EnemyEncount : MonoBehaviour
         {
 
             Debug.Log("敵に当たった");
-           await _sceneLoader.FadeIn(_sceneName);
+          // await _sceneLoader.FadeIn(_sceneName);
         }
     }
 }

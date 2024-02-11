@@ -951,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c4cd8e74c9d81342b922572d7e9e966, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 920f525e977013d4ab01663a3ec16194, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sheetID: 1mR8NpR9oVzBzroXXj5ehMmj7DeLR2etTBt8ebkv-NPs
-  _sheetName: "\u304A\u3044\u304B\u308F\u6226\u95D8\u7D42\u4E86\u5F8C"
+  _sheetName: "\u3042\u3079\u30D0\u30C8\u30EB\u524D"
 --- !u!4 &1973886249
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,6 @@ MonoBehaviour:
   _storyEventData: {fileID: 11400000, guid: c1bd6b44b6644064a835f61f6d619181, type: 2}
   _soundManager: {fileID: 889226913}
   _effectManager: {fileID: 1920627970}
-  _sceneLoader: {fileID: 0}
   _rikuVoiceCount: 0
 --- !u!4 &2072493004
 Transform:

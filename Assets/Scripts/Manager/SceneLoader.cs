@@ -23,7 +23,7 @@ public class SceneLoader : MonoBehaviour
     {
         [SceneName.Unknown] = "",
         [SceneName.Title] = "Title",
-        [SceneName.Game] = "Game",
+        [SceneName.syokimap] = "syokimap",
         [SceneName.Battle_Oikawa] = "Battle_Oikawa",
         [SceneName.Battle_Veru] = "Battle_Veru",
         [SceneName.Battle_Zako] = "Battle_Zako",
@@ -35,7 +35,12 @@ public class SceneLoader : MonoBehaviour
         [SceneName.Zyosi] = "Zyosi",
         [SceneName.Ippan] = "Ippan",
         [SceneName.Abe] = "Abe",
-
+        [SceneName.abeScene1]= "abeScene1",
+        [SceneName.VelScene1] = "VelScene1",
+        [SceneName.OikawaScene1] = "OikawaScene1",
+        [SceneName.OikawaScene] = "OikawaScene",
+        [SceneName.VelScene] = "VelScene",
+        [SceneName.abeScene] = "abeScene",
     };
 
     private void Start()
@@ -47,7 +52,7 @@ public class SceneLoader : MonoBehaviour
     {
         Unknown,
         Title,
-        Game,
+        syokimap,
         Battle,
         Battle_Veru,
         Battle_Oikawa,
@@ -59,6 +64,13 @@ public class SceneLoader : MonoBehaviour
         Zyosi,
         Ippan,
         Abe,
+        abeScene1,
+        VelScene1,
+        OikawaScene1,
+        VelScene,
+        OikawaScene,
+        abeScene,
+
     }
 
     public async UniTask FadeIn(SceneName typeName)

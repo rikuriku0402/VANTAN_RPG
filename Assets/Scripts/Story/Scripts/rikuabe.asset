@@ -9,19 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4717dde1cf09ab94e8d2d53a5ca24925, type: 3}
-  m_Name: SceneData
+  m_Script: {fileID: 11500000, guid: bcc0f685a321b5141a6f1570bab17b98, type: 3}
+  m_Name: rikuabe
   m_EditorClassIdentifier: 
-  _scenebase:
-  - _test: 2
-    _Xpoint: 0
-    _Ypoint: 0
-  - _test: 9
-    _Xpoint: -1
-    _Ypoint: 0
-  - _test: 12
-    _Xpoint: 1
-    _Ypoint: 0
-  - _test: 11
-    _Xpoint: 0
-    _Ypoint: 1
+  _charaVoice: []

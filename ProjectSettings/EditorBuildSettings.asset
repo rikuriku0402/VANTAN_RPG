@@ -33,6 +33,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Battle_Oikawa.unity
     guid: f67a34cf337f77740a3197cf94a3bcfa
   - enabled: 1
+    path: Assets/Scenes/Test_StoryScene.unity
+    guid: dcb9f1c4c083c154d8f28159c72ae54e
+  - enabled: 1
     path: Assets/Scenes/Map/Ippan.unity
     guid: b3d9aa985d34a2849817fd3ff1fc50fe
   - enabled: 1
@@ -47,4 +50,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OikawaScene.unity
     guid: b4de471bb0a842043848b477055780ad
+  - enabled: 1
+    path: Assets/Scenes/UITest.unity
+    guid: f2f0654444a3f554e9207f293e0b97f2
+  - enabled: 1
+    path: Assets/Scenes/abeScene 1.unity
+    guid: a33b2df8fabd35b4a93f9ae0fce5b32e
+  - enabled: 1
+    path: Assets/Scenes/abeScene.unity
+    guid: 2ff1c6546b32a3743bd797b2a45deac7
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/VelScene 1.unity
+    guid: 6b0cbc7ef3de1844abe50e9a17c2fb26
+  - enabled: 1
+    path: Assets/Scenes/Battle_Abe.unity
+    guid: a653dd03453835047a0d1254eb34b705
+  - enabled: 1
+    path: Assets/Scenes/OikawaScene 1.unity
+    guid: 43a734bcb650b4c4ba8c4a30fb69f820
   m_configObjects: {}

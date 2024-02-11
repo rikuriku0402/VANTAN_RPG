@@ -35,7 +35,7 @@ public class BattleStart : MonoBehaviour
         {
             case SceneLoader.SceneName.Unknown:
             case SceneLoader.SceneName.Title:
-            case SceneLoader.SceneName.Game:
+            case SceneLoader.SceneName.syokimap:
             case SceneLoader.SceneName.GameOver:
             case SceneLoader.SceneName.GameClear:
                 break;

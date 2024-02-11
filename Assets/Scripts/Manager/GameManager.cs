@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+            MapSceneMove._playerMapPosX = 0;
+            MapSceneMove._playerMapPosY = 0;
         }
-        
-        MapSceneMove._playerMapPosX = 0;
-        MapSceneMove._playerMapPosY = 0;
+       
     }
 
     public void GameClear()

@@ -9,9 +9,11 @@ public class BossEvent : MonoBehaviour
     [SerializeField]
     PlayerController _playerController;
 
-  
+    [SerializeField]
+    private SceneLoader _sceneLoader;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private async void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
@@ -19,13 +21,15 @@ public class BossEvent : MonoBehaviour
             switch (ID) {
 
                 case 0:
-                    SceneManager.LoadScene("OikawaScene");
+                    await _sceneLoader.FadeIn(SceneLoader.SceneName.OikawaScene);
                     break;
                 case 1:
-                    SceneManager.LoadScene("VelScene");
+                    await _sceneLoader.FadeIn(SceneLoader.SceneName.VelScene);
                     break;
                 case 2:
+                    await _sceneLoader.FadeIn(SceneLoader.SceneName.abeScene);
                     break;
+                    
                 case 3:
                     break;
 
