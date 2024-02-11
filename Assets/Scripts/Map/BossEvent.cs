@@ -9,6 +9,7 @@ public class BossEvent : MonoBehaviour
     [SerializeField]
     PlayerController _playerController;
 
+  
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
