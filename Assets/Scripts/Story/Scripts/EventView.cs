@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class EventView : MonoBehaviour
 {
@@ -21,9 +22,6 @@ public class EventView : MonoBehaviour
 
     [SerializeField]
     private EffectManager _effectManager;
-
-    [SerializeField]
-    private SceneLoader _sceneLoader;
 
     [SerializeField]
     private int _rikuVoiceCount;
@@ -52,7 +50,8 @@ public class EventView : MonoBehaviour
         [EventName.OIKAWA_BGM] = "及川マップBGM",
         [EventName.CHANGE_HIGHSCHOOL] = "ベル戦闘開始",
         [EventName.CHANGE_OIKAWA] = "おいかわ戦闘開始",
-        [EventName.RETURN_HIGHSCHOOLMAP] = "b",
+        [EventName.RETURN_HIGHSCHOOLMAP] = "ベルマップ",
+        [EventName.RETURN_OIKAWAMAP] = "おいかわマップ",
     };
 
 
@@ -141,11 +140,7 @@ public class EventView : MonoBehaviour
 
                 if(EventAction.CHANGE_SCENE == t.Action[i])
                 {
-                    if(_eventName[t.EventName] == "")
-                    {
-
-                    }
-                    //_sceneLoader.FadeIn(SceneLoader.SceneName.Title/*バトルシーン突入*/);
+                    SceneManager.LoadScene(eventName);
                 }
 
                 if (EventAction.NONE == t.Action[i])
