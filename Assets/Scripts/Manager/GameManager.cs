@@ -20,27 +20,29 @@ public class GameManager : MonoBehaviour
 
     private async void Update()
     {
-        await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            await _sceneLoader.FadeIn(SceneLoader.SceneName.Title);
+        }
+        
         MapSceneMove._playerMapPosX = 0;
         MapSceneMove._playerMapPosY = 0;
     }
 
-    public async void GameClear()
+    public void GameClear()
     {
         if (_isGame)
         {
             _isGame = false;
-            await _sceneLoader.FadeIn(SceneLoader.SceneName.GameClear);
             Debug.Log("クリア");
         }
     }
 
-    public async void GameOver()
+    public void GameOver()
     {
         if (!_isGame)
         {
             _isGame = true;
-            await _sceneLoader.FadeIn(SceneLoader.SceneName.GameOver);
             Debug.Log("ゲームオーバー");
         }
     }
