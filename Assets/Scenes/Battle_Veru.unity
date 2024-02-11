@@ -6042,7 +6042,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30F4\u30A7\u30EB"
+  m_Text: "\u3042\u3079"
 --- !u!222 &1849786345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6243,7 +6243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9db66b764c4bcd149837746c9553188e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 920f525e977013d4ab01663a3ec16194, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
