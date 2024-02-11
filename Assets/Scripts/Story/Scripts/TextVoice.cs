@@ -30,6 +30,7 @@ public class TextVoice : MonoBehaviour
         [CharacterName.NARRATION] = "ナレーション",
         [CharacterName.RIKU] = "りく",
         [CharacterName.VERU] = "ヴェル",
+        [CharacterName.OIKAWA] = "おいかわ",
         [CharacterName.GOD] = "神様",
         [CharacterName.DAEMONKING] = "魔王",
     };
@@ -64,7 +65,7 @@ public class TextVoice : MonoBehaviour
     {
         foreach (var t in _charaVoice.CharaVoice)
         {
-            if (t.Voice== null) return;
+            if (t.Voice[_voiceID[(int)t.CharacterName]] == null) return;
 
             if (_charaName[t.CharacterName] == name)
             {

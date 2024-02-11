@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc0f685a321b5141a6f1570bab17b98, type: 3}
+  m_Name: Vel&saba 1
+  m_EditorClassIdentifier: 
+  _charaVoice:
+  - _name: "\u308A\u304F"
+    _charaName: 4
+    _voice:
+    - {fileID: 8300000, guid: cd21c14a43e7f4549ad7597123cb1979, type: 3}
+    - {fileID: 8300000, guid: 8aca11d592542364d9acd6eb25ad194d, type: 3}
+    - {fileID: 8300000, guid: ff22311748d42e34c969db59902aced6, type: 3}
+    - {fileID: 8300000, guid: 41f8231df9b078842b65337657aa6858, type: 3}
+    - {fileID: 8300000, guid: bf675b31d6e65c049907375668abe7f9, type: 3}
+    - {fileID: 8300000, guid: 3863093ca63746f41a81463383ad97c2, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+  - _name: "\u30CA\u30EC\u30FC\u30B7\u30E7\u30F3"
+    _charaName: 1
+    _voice:
+    - {fileID: 0}
+  - _name: "\u795E\u69D8"
+    _charaName: 2
+    _voice:
+    - {fileID: 0}
+  - _name: "\u9B54\u738B"
+    _charaName: 3
+    _voice:
+    - {fileID: 0}
+  - _name: "\u30F4\u30A7\u30EB"
+    _charaName: 5
+    _voice:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - _name: "\u53CA\u5DDD"
+    _charaName: 6
+    _voice:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

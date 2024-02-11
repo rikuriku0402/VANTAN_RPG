@@ -40,3 +40,12 @@ MonoBehaviour:
     _se: {fileID: 0}
     _bgm: {fileID: 0}
     _eventAction: 07000000
+  - _event: 
+    _eventName: 10
+    _sheetName: 0
+    _laneNum: 1
+    _effect:
+    - {fileID: 0}
+    _se: {fileID: 0}
+    _bgm: {fileID: 0}
+    _eventAction: 07000000

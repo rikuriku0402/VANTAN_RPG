@@ -82,6 +82,8 @@ public enum EventName
     OIKAWA_BGM,
     CHANGE_OIKAWA,
     CHANGE_HIGHSCHOOL,
+    RETURN_OIKAWAMAP,
+    RETURN_HIGHSCHOOLMAP,
 
 }
 

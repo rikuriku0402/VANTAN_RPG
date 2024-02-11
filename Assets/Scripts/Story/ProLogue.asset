@@ -10,12 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcc0f685a321b5141a6f1570bab17b98, type: 3}
-  m_Name: CharaVoiceData
+  m_Name: ProLogue
   m_EditorClassIdentifier: 
   _charaVoice:
   - _name: "\u308A\u304F"
     _charaName: 4
     _voice:
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
+    - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
     - {fileID: 8300000, guid: b9d14a570c1d8ca43a6cffa7f3e2f9dc, type: 3}
   - _name: "\u30CA\u30EC\u30FC\u30B7\u30E7\u30F3"
     _charaName: 1
@@ -43,6 +52,14 @@ MonoBehaviour:
     - {fileID: 0}
   - _name: "\u30F4\u30A7\u30EB"
     _charaName: 5
+    _voice:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - _name: "\u53CA\u5DDD"
+    _charaName: 6
     _voice:
     - {fileID: 0}
     - {fileID: 0}
