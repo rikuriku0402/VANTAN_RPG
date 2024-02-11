@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc0f685a321b5141a6f1570bab17b98, type: 3}
+  m_Name: abe
+  m_EditorClassIdentifier: 
+  _charaVoice:
+  - _name: "\u308A\u304F"
+    _charaName: 4
+    _voice:
+    - {fileID: 8300000, guid: 79c96f8e04594a049a534868263d2132, type: 3}
+  - _name: "\u9B54\u738B"
+    _charaName: 3
+    _voice:
+    - {fileID: 8300000, guid: 099773e89246afc40a4f41ec7bef567f, type: 3}
+    - {fileID: 8300000, guid: 3a1e3c952f371bc448057e2676d7c898, type: 3}
+  - _name: "\u795E"
+    _charaName: 2
+    _voice:
+    - {fileID: 0}
+  - _name: "\u30CA\u30EC\u30FC\u30B7\u30E7\u30F3"
+    _charaName: 1
+    _voice:
+    - {fileID: 0}
+  - _name: "\u30F4\u30A7\u30EB"
+    _charaName: 5
+    _voice:
+    - {fileID: 0}
+  - _name: "\u53CA\u5DDD"
+    _charaName: 6
+    _voice:
+    - {fileID: 0}

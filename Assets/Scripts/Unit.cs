@@ -98,7 +98,7 @@ public class Unit : MonoBehaviour
         _battleManager.gameObject.SetActive(true);
     }
 
-    public async void OnDamage(int damage)
+    public void OnDamage(int damage)
     {
         _characterStatusList.hp -= damage;
         Debug.Log(damage);

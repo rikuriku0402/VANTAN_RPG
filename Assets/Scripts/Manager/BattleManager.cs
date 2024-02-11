@@ -97,8 +97,8 @@ public class BattleManager : MonoBehaviour
             {
                 isGame = true;
                 _gameManager.GameOver();
-                await _sceneLoader.FadeIn(_sceneName);
                 Debug.Log("ゲームオーバー");
+                await _sceneLoader.FadeIn(_sceneName);
             }
             return;
         }
@@ -177,17 +177,32 @@ public class BattleManager : MonoBehaviour
                 if (_rinkuUnit.gameObject.activeSelf)
                 {
                     PlayerDefense(_rinkuUnit.CharacterStatusList.defense);
-                    _battleText.BattleLog(_rinkuUnit.CharacterStatusList.name, _enemyUnit.CharacterStatusList.name, _rinkuUnit.CharacterStatusList.attack);
+                    _battleText.BattleLog(_enemyUnit.CharacterStatusList.name, _rinkuUnit.CharacterStatusList.name, _enemyUnit.CharacterStatusList.attack);
+                    if (_rinkuUnit.CharacterStatusList.hp <= 0)
+                    {
+                        _rinkuUnit.gameObject.SetActive(false);
+                        _abeUnit.gameObject.SetActive(true);
+                    }
                 }
                 else if (_abeUnit.gameObject.activeSelf)
                 {
                     PlayerDefense(_abeUnit.CharacterStatusList.defense);
-                    _battleText.BattleLog(_abeUnit.CharacterStatusList.name, _enemyUnit.CharacterStatusList.name, _abeUnit.CharacterStatusList.attack);
+                    _battleText.BattleLog(_enemyUnit.CharacterStatusList.name, _abeUnit.CharacterStatusList.name, _enemyUnit.CharacterStatusList.attack);
+                    if (_abeUnit.CharacterStatusList.hp <= 0)
+                    {
+                        _abeUnit.gameObject.SetActive(false);
+                        _onoUnit.gameObject.SetActive(true);
+                    }
                 }
                 else if (_onoUnit.gameObject.activeSelf)
                 {
                     PlayerDefense(_onoUnit.CharacterStatusList.defense);
                     _battleText.BattleLog(_onoUnit.CharacterStatusList.name, _enemyUnit.CharacterStatusList.name, _onoUnit.CharacterStatusList.attack);
+                    if (_onoUnit.CharacterStatusList.hp <= 0)
+                    {
+                        _onoUnit.gameObject.SetActive(false);
+                        _rinkuUnit.gameObject.SetActive(true);
+                    }
                 }
                 
                 _isPlayerTurn = false;
@@ -292,8 +307,19 @@ public class BattleManager : MonoBehaviour
         var enemyAttack = _enemyUnit.CharacterStatusList.attack - defense;
         
         if (enemyAttack <= 0) enemyAttack = 0;
-        _rinkuUnit.OnDamage(enemyAttack);
-        
+        if (_rinkuUnit.gameObject.activeSelf)
+        {
+            _rinkuUnit.OnDamage(enemyAttack);
+        }
+        else if (_abeUnit.gameObject.activeSelf)
+        {
+            _abeUnit.OnDamage(enemyAttack);
+        }
+        else if (_onoUnit.gameObject.activeSelf)
+        {
+            _onoUnit.OnDamage(enemyAttack);
+        }
+
         Debug.Log(enemyAttack);
     }
 }
