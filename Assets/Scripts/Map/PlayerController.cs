@@ -33,8 +33,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Sprite _kurunaRiku;
 
-    [SerializeField]
-    EnemySpown _enemySpown;
     private SpriteRenderer _spriteRenderer;
 
     async void Start()
@@ -42,7 +40,6 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         // このスクリプトがアタッチされているゲームオブジェクトにアタッチされているコンポーネントの中から、<指定>したコンポーネントの情報を取得して、左辺に用意した変数に代入
         rb = GetComponent<Rigidbody2D>();     // あるいは、TryGeyComponent(out rb);　でも可
-        _enemySpown._konaideRock = true;
 
         switch (MapSceneMove._maeScene)
         {
@@ -138,7 +135,6 @@ public class PlayerController : MonoBehaviour
     private async UniTask Wait(int time)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(time));
-        _enemySpown._konaideRock = false;
 
     }
 }
