@@ -140,7 +140,7 @@ public class EventView : MonoBehaviour
 
                 if(EventAction.CHANGE_SCENE == t.Action[i])
                 {
-                    SceneManager.LoadScene(eventName);
+                    SceneManager.LoadScene(_eventName[t.EventName]);
                 }
 
                 if (EventAction.NONE == t.Action[i])
