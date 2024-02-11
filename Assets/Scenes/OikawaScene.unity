@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 725462058}
   - component: {fileID: 725462057}
   - component: {fileID: 725462056}
+  - component: {fileID: 725462059}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -374,6 +375,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &725462059
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725462054}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &792456756
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +419,7 @@ MonoBehaviour:
   _gssReader: {fileID: 1973886248}
   _textView: {fileID: 995417580}
   _soundManager: {fileID: 889226913}
-  _charaVoice: {fileID: 11400000, guid: 483660d3fd1252044a973809ffb56c35, type: 2}
+  _charaVoice: {fileID: 11400000, guid: 71dc4b10d91dd0e45a6b88cbd654d067, type: 2}
   _voiceID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &792456758
 Transform:
@@ -970,6 +983,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125776395}
   m_CullTransparentMesh: 1
+--- !u!1 &1303861568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303861570}
+  - component: {fileID: 1303861569}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1303861569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303861568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78bfc969deddd479e013b47dca9429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 725462059}
+  _duration: 0.5
+--- !u!4 &1303861570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303861568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 841.3597, y: 394.71362, z: 7.999756}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387179341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1229,7 @@ MonoBehaviour:
   _storyEventData: {fileID: 11400000, guid: c1bd6b44b6644064a835f61f6d619181, type: 2}
   _soundManager: {fileID: 889226913}
   _effectManager: {fileID: 1920627970}
+  _sceneLoader: {fileID: 1303861569}
   _rikuVoiceCount: 0
 --- !u!4 &2072493004
 Transform:

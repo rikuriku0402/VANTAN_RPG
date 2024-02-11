@@ -559,7 +559,7 @@ MonoBehaviour:
   _gssReader: {fileID: 1973886248}
   _textView: {fileID: 995417580}
   _soundManager: {fileID: 889226913}
-  _charaVoice: {fileID: 11400000, guid: 483660d3fd1252044a973809ffb56c35, type: 2}
+  _charaVoice: {fileID: 11400000, guid: a0658e320dac2824f9e4b5a04205e36c, type: 2}
   _voiceID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &792456758
 Transform:
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sheetID: 1mR8NpR9oVzBzroXXj5ehMmj7DeLR2etTBt8ebkv-NPs
-  _sheetName: "\u30D9\u30EB\u6226\u95D8\u958B\u59CB\u524D"
+  _sheetName: "\u30D9\u30EB\u6226\u95D8\u7D42\u4E86\u5F8C"
 --- !u!4 &1973886249
 Transform:
   m_ObjectHideFlags: 0
@@ -1247,6 +1247,7 @@ MonoBehaviour:
   _storyEventData: {fileID: 11400000, guid: c1bd6b44b6644064a835f61f6d619181, type: 2}
   _soundManager: {fileID: 889226913}
   _effectManager: {fileID: 1920627970}
+  _sceneLoader: {fileID: 0}
   _rikuVoiceCount: 0
 --- !u!4 &2072493004
 Transform:

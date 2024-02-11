@@ -23,6 +23,9 @@ public class EventView : MonoBehaviour
     private EffectManager _effectManager;
 
     [SerializeField]
+    private SceneLoader _sceneLoader;
+
+    [SerializeField]
     private int _rikuVoiceCount;
 
     private Dictionary<SheetName, string> _sheetName = new()
@@ -47,8 +50,9 @@ public class EventView : MonoBehaviour
         [EventName.EST_BGM] = "ESTマップBGM",
         [EventName.GIRL_BGM] = "女子マップBGM",
         [EventName.OIKAWA_BGM] = "及川マップBGM",
-        [EventName.CHANGE_HIGHSCHOOL] = "飛ばしたいscene",
-        [EventName.CHANGE_OIKAWA] = "飛ばしたいscene"
+        [EventName.CHANGE_HIGHSCHOOL] = "ベル戦闘開始",
+        [EventName.CHANGE_OIKAWA] = "おいかわ戦闘開始",
+        [EventName.RETURN_HIGHSCHOOLMAP] = "",
     };
 
 
@@ -137,7 +141,11 @@ public class EventView : MonoBehaviour
 
                 if(EventAction.CHANGE_SCENE == t.Action[i])
                 {
-                    Debug.Log(_eventName[t.EventName]);
+                    if(_eventName[t.EventName] == "")
+                    {
+
+                    }
+                    _sceneLoader.FadeIn(SceneLoader.SceneName.Title/*バトルシーン突入*/);
                 }
 
                 if (EventAction.NONE == t.Action[i])

@@ -46,6 +46,7 @@ public enum CharacterName
     DAEMONKING,
     RIKU,
     VERU,
+    OIKAWA,
 
 }
 
