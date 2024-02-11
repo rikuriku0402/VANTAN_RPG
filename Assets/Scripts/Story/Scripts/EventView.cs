@@ -140,7 +140,14 @@ public class EventView : MonoBehaviour
 
                 if(EventAction.CHANGE_SCENE == t.Action[i])
                 {
-                    SceneManager.LoadScene(_eventName[t.EventName]);
+                    if(eventName == "ベル戦闘開始")
+                    {
+                        SceneManager.LoadScene("Battle_Veru");
+                    }
+                    if(eventName == "ベルマップ")
+                    {
+                        SceneManager.LoadScene("Ippan");
+                    }
                 }
 
                 if (EventAction.NONE == t.Action[i])
