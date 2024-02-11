@@ -52,7 +52,7 @@ public class EventView : MonoBehaviour
         [EventName.OIKAWA_BGM] = "及川マップBGM",
         [EventName.CHANGE_HIGHSCHOOL] = "ベル戦闘開始",
         [EventName.CHANGE_OIKAWA] = "おいかわ戦闘開始",
-        [EventName.RETURN_HIGHSCHOOLMAP] = "",
+        [EventName.RETURN_HIGHSCHOOLMAP] = "b",
     };
 
 
@@ -145,7 +145,7 @@ public class EventView : MonoBehaviour
                     {
 
                     }
-                    _sceneLoader.FadeIn(SceneLoader.SceneName.Title/*バトルシーン突入*/);
+                    //_sceneLoader.FadeIn(SceneLoader.SceneName.Title/*バトルシーン突入*/);
                 }
 
                 if (EventAction.NONE == t.Action[i])
